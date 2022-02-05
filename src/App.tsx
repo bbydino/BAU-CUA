@@ -7,13 +7,14 @@ const App = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#FA2D2D",
+        main: "#C60000",
       },
       secondary: {
         main: "#D1C500",
       },
     },
   });
+
   return (
     <ThemeProvider theme={theme}>
       <div className="bau-cua">

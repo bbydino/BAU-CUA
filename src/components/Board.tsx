@@ -1,7 +1,8 @@
-import { Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { BoardItem as BoardItemModel, BOARD_ITEM_MAPPING } from "../util";
 import BoardItem from "./BoardItem";
+import bg from "../img/bg.jpg";
 
 const Board = () => {
   const [selections, setSelections] = useState([]);
@@ -25,12 +26,34 @@ const Board = () => {
   );
 
   return (
-    <Grid container flexDirection="column" spacing={2}>
-      <Grid container item flexDirection="row" justifyContent="space-evenly">
+    <Grid
+      container
+      flexDirection="column"
+      spacing={2}
+      sx={{
+        background: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Grid
+        container
+        item
+        flexDirection="row"
+        justifyContent="space-evenly"
+        wrap="wrap"
+      >
         {BOARD_ITEM_MAPPING.slice(0, 3).map(renderBoardItem)}
       </Grid>
       <Grid container item flexDirection="row" justifyContent="space-evenly">
         {BOARD_ITEM_MAPPING.slice(3, 6).map(renderBoardItem)}
+      </Grid>
+      <Grid item>
+        <Button variant="contained" size="large" color="secondary" fullWidth>
+          <Typography variant="overline" color="primary">
+            <b>SUBMIT BET</b>
+          </Typography>
+        </Button>
       </Grid>
     </Grid>
   );

@@ -14,6 +14,15 @@ export const BOARD_ITEM_NAMES = {
   DEER: "deer",
 };
 
+export const BOARD_ITEM_NAMES_VIET = {
+  SHRIMP: "tôm",
+  CRAB: "cua",
+  FISH: "cá",
+  CHICKEN: "gà",
+  SQUASH: "bầu",
+  DEER: "nai",
+};
+
 export const BOARD_ITEM_IMAGES = {
   SHRIMP: shrimpImg,
   CRAB: crabImg,

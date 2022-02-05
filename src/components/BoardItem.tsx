@@ -1,12 +1,6 @@
-import {
-  Avatar,
-  Button,
-  ButtonGroup,
-  Grid,
-  Input,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import { Avatar, Grid, Input, Typography, Tooltip } from "@mui/material";
+import React, { useState } from "react";
+import { toViet } from "../util";
 
 interface BoardItemProps {
   name: string;
@@ -20,6 +14,20 @@ const BoardItem: React.FC<BoardItemProps> = ({
   color,
   onClick,
 }) => {
+  const [value, setValue] = useState<number>(0);
+
+  const handleInputChange = (event) => {
+    setValue(event.target.value === "" ? 0 : Number(event.target.value));
+  };
+
+  const handleBlur = () => {
+    if (value < 0) {
+      setValue(0);
+    } else if (value > 100) {
+      setValue(100);
+    }
+  };
+
   return (
     <Grid
       item
@@ -30,37 +38,77 @@ const BoardItem: React.FC<BoardItemProps> = ({
       xs={4}
     >
       <Grid item>
-        <Avatar
-          src={image}
-          alt={name}
-          sx={{
-            width: "100px",
-            height: "100px",
-            border: "6.9px solid " + color,
-          }}
-          onClick={() => onClick(name)}
-        />
-      </Grid>
-      <Grid
-        item
-        container
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Typography
-          align="center"
-          width="100%"
-          variant="overline"
-          color="secondary"
+        <Tooltip
+          title={
+            <React.Fragment>
+              <Typography
+                align="center"
+                width="100%"
+                variant="overline"
+                color="secondary"
+              >
+                {toViet(name)}
+              </Typography>
+            </React.Fragment>
+          }
+          placement="bottom"
         >
-          {name}
-        </Typography>
-        <ButtonGroup variant="contained" disableElevation>
-          <Button size="small">+</Button>
-          <Input placeholder="bet $$$" color="primary" />
-          <Button size="small">-</Button>
-        </ButtonGroup>
+          <Typography
+            align="center"
+            width="100%"
+            variant="overline"
+            color="secondary"
+          >
+            <b>{name}</b>
+          </Typography>
+        </Tooltip>
+      </Grid>
+      <Grid item>
+        <Tooltip
+          title={
+            <React.Fragment>
+              <Typography
+                align="center"
+                width="100%"
+                variant="overline"
+                color="secondary"
+              >
+                {toViet(name)}
+              </Typography>
+            </React.Fragment>
+          }
+          placement="top"
+        >
+          <Avatar
+            src={image}
+            alt={name}
+            sx={{
+              width: "100px",
+              height: "100px",
+              border: "6.9px solid " + color,
+            }}
+            onClick={() => onClick(name)}
+          />
+        </Tooltip>
+      </Grid>
+      <Grid item>
+        <Input
+          value={value}
+          size="small"
+          onChange={handleInputChange}
+          onBlur={handleBlur}
+          inputProps={{
+            step: 1,
+            min: 0,
+            max: 100,
+            type: "number",
+            "aria-labelledby": "input-slider",
+            style: {
+              textAlign: "center",
+              backgroundColor: color,
+            },
+          }}
+        />
       </Grid>
     </Grid>
   );
