@@ -39,6 +39,7 @@ const PlayerInput = () => {
 
   const renderBoardItemInput = (item: BoardItem) => (
     <BoardItemInput
+      key={item.name + "input"}
       item={item}
       value={values[item.idx].value}
       handleInputChange={handleInputChange}
@@ -62,7 +63,7 @@ const PlayerInput = () => {
       </Grid>
       <Grid item>
         <Button variant="contained" size="large" color="secondary" fullWidth>
-          <Typography variant="overline" color="primary">
+          <Typography align="center" variant="h5" color="primary">
             <b>SUBMIT BET</b>
           </Typography>
         </Button>

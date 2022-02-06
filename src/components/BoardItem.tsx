@@ -23,10 +23,10 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
               <Typography
                 align="center"
                 width="100%"
-                variant="overline"
+                variant="body2"
                 color="secondary"
               >
-                {toViet(item.name)}
+                <span>{toViet(item.name)}</span>
               </Typography>
             </React.Fragment>
           }
@@ -35,10 +35,10 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
           <Typography
             align="center"
             width="100%"
-            variant="overline"
+            variant="body2"
             color="secondary"
           >
-            <b>{item.name}</b>
+            <span>{item.name}</span>
           </Typography>
         </Tooltip>
       </Grid>
@@ -48,10 +48,10 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
             <Typography
               align="center"
               width="100%"
-              variant="overline"
+              variant="body2"
               color="secondary"
             >
-              {toViet(item.name)}
+              <span>{toViet(item.name)}</span>
             </Typography>
           </React.Fragment>
         }

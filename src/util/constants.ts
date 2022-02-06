@@ -87,7 +87,7 @@ export const BOARD_ITEM_MAPPING: BoardItem[] = [
   {
     name: BoardItemName.SHRIMP,
     img: shrimpImg,
-    color: "#313131",
+    color: "#696969",
     idx: 5,
   },
 ];

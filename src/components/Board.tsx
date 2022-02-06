@@ -14,7 +14,7 @@ const Board = () => {
 
   const renderBoardItem = (item: BoardItemModel) => (
     <BoardItem
-      key={item.name}
+      key={item.name + "boardItem"}
       item={item}
       handleItemClick={(name) => handleItemClick(name)}
     />

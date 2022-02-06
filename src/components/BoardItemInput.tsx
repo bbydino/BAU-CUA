@@ -18,15 +18,15 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
   handleInputChange,
 }) => {
   return (
-    <Grid item container flexDirection="column" xs={4}>
+    <Grid item container flexDirection="column" justifyContent="center" xs={4}>
       <Grid item>
         <Typography
           align="center"
           width="100%"
-          variant="overline"
+          variant="body2"
           color="secondary"
         >
-          <b>{item.name}</b>
+          <span>{item.name}</span>
         </Typography>
       </Grid>
       <Grid item>

@@ -40,7 +40,7 @@ const App = () => {
               variant="h3"
               color="primary"
               padding="2%"
-              textAlign="center"
+              align="center"
               sx={{ textShadow: "3px 3px 1px #000" }}
             >
               <b>BẦU CUA GÀ TÔM CÁ NAI</b>
