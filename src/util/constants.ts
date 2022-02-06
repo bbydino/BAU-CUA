@@ -1,9 +1,9 @@
-import shrimpImg from "../img/shrimp.gif";
-import crabImg from "../img/crab.gif";
-import fishImg from "../img/fish.gif";
 import chickenImg from "../img/chicken.gif";
-import squashImg from "../img/squash.gif";
+import crabImg from "../img/crab.gif";
 import deerImg from "../img/deer.gif";
+import fishImg from "../img/fish.gif";
+import shrimpImg from "../img/shrimp.gif";
+import squashImg from "../img/squash.gif";
 
 export const BOARD_ITEM_NAMES = {
   SHRIMP: "shrimp",
@@ -45,6 +45,12 @@ export interface BoardItem {
   name: BoardItemName;
   img: string;
   color: string;
+  idx: number;
+}
+
+export interface BoardItemValue {
+  item: BoardItem;
+  value: number;
 }
 
 export const BOARD_ITEM_MAPPING: BoardItem[] = [
@@ -52,30 +58,36 @@ export const BOARD_ITEM_MAPPING: BoardItem[] = [
     name: BoardItemName.DEER,
     img: deerImg,
     color: "#7A4B11",
+    idx: 0,
   },
   {
     name: BoardItemName.SQUASH,
     img: squashImg,
     color: "#5AAFF3",
+    idx: 1,
   },
   {
     name: BoardItemName.CHICKEN,
     img: chickenImg,
     color: "#FFAE4A",
+    idx: 2,
   },
   {
     name: BoardItemName.FISH,
     img: fishImg,
     color: "#FF278E",
+    idx: 3,
   },
   {
     name: BoardItemName.CRAB,
     img: crabImg,
     color: "#00CB61",
+    idx: 4,
   },
   {
     name: BoardItemName.SHRIMP,
     img: shrimpImg,
     color: "#313131",
+    idx: 5,
   },
 ];
