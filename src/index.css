@@ -1,8 +1,21 @@
+@font-face {
+  font-family: "VPSQUNHH";
+  src: url("./fonts/VPSQUNHH.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "VPSQUNHT";
+  src: url("./fonts/VPSQUNHT.TTF") format("truetype");
+}
+
+* {
+  font-family: "VPSQUNHH", "VPSQUNHT", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Wonton", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
