@@ -21,19 +21,19 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        className="bau-cua"
-        style={{
-          background: `url(${kiryuCash})`,
-          backgroundSize: "30%",
-          backgroundRepeat: "repeat",
-        }}
-      >
+      <div>
         <Grid
+          className="bau-cua"
           container
           flexDirection="column"
-          justifyContent="center"
-          spacing={1}
+          justifyContent="flex-start"
+          style={{
+            background: `url(${kiryuCash})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "repeat",
+            height: "100vh",
+            gap: 10,
+          }}
         >
           <Grid container item justifyContent="center">
             <Typography
