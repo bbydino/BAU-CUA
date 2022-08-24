@@ -1,16 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { BoardItemName } from "../../util";
 import type { RootState } from "../store";
 
 // Define a type for the slice state
 export interface UserState {
   name: string;
   money: number;
+  winStreak: number;
+  loseStreak: number;
+  mostChosen: BoardItemName | undefined;
+  mostWon: BoardItemName | undefined;
+  mostLost: BoardItemName | undefined;
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
-  name: "username",
-  money: 0,
+  name: "guest",
+  money: 1000,
+  winStreak: 0,
+  loseStreak: 0,
+  mostChosen: undefined,
+  mostWon: undefined,
+  mostLost: undefined,
 };
 
 export const userSlice = createSlice({
