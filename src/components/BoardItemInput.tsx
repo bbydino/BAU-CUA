@@ -1,6 +1,6 @@
-import { Grid, Input, Typography } from "@mui/material";
+import { Grid, InputAdornment, TextField, Typography } from "@mui/material";
 import React from "react";
-import { BoardItem } from "../util";
+import { BoardItem, FONT_FAMILY } from "../util";
 
 interface BoardItemInputProps {
   item: BoardItem;
@@ -30,21 +30,26 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
         </Typography>
       </Grid>
       <Grid item>
-        <Input
+        <TextField
           fullWidth
-          value={value}
+          id="standard-number"
+          label="Place Your Bets!!!"
+          type="number"
+          variant="standard"
+          value={value.toString()}
           size="small"
           onChange={(event) => handleInputChange(item, event)}
           onBlur={() => handleBlur(item)}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
           inputProps={{
-            step: 1,
             min: 0,
             max: 100,
-            type: "number",
-            "aria-labelledby": "input-slider",
             style: {
               textAlign: "center",
               backgroundColor: item.color,
+              fontFamily: FONT_FAMILY,
             },
           }}
         />

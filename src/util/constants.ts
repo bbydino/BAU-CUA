@@ -19,7 +19,7 @@ export const BOARD_ITEM_NAMES_VIET = {
   CRAB: "cua",
   FISH: "cá",
   CHICKEN: "gà",
-  SQUASH: "bầu",
+  SQUASH: "bÀu",
   DEER: "nai",
 };
 

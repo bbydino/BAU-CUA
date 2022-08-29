@@ -15,26 +15,31 @@ const PlayerInfo = () => {
       sx={{ ...BG_STYLE, padding: "10px" }}
     >
       <Grid item>
+        <Typography variant="h6" color="secondary">
+          Player Summary
+        </Typography>
+      </Grid>{" "}
+      <Grid item>
         <Typography variant="body2" color="secondary">
-          <span>NAME: {user.name}</span>
+          NAME: {user.name}
         </Typography>
         <Typography variant="body2" color="secondary">
-          <span>MONEY: {user.money}</span>
+          MONEY: {user.money}
         </Typography>
         <Typography variant="body2" color="secondary">
-          <span>WIN STREAK: {user.winStreak}</span>
+          WIN STREAK: {user.winStreak}
         </Typography>
         <Typography variant="body2" color="secondary">
-          <span>LOSING STREAK: {user.loseStreak}</span>
+          LOSING STREAK: {user.loseStreak}
         </Typography>
         <Typography variant="body2" color="secondary">
-          <span>MOST CHOSEN: {user.mostChosen}</span>
+          MOST CHOSEN: {user.mostChosen}
         </Typography>
         <Typography variant="body2" color="secondary">
-          <span>LUCKY ANIMAL: {user.mostWon}</span>
+          LUCKY ANIMAL: {user.mostWon}
         </Typography>
         <Typography variant="body2" color="secondary">
-          <span>UNLUCKY ANIMAL: {user.mostLost}</span>
+          UNLUCKY ANIMAL: {user.mostLost}
         </Typography>
       </Grid>
       <Grid item></Grid>
