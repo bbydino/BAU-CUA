@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import {
-  BG_STYLE,
   BoardItem as BoardItemModel,
   BOARD_ITEM_MAPPING,
+  CARD_STYLE,
 } from "../util";
 import BoardItem from "./BoardItem";
 
@@ -26,7 +26,7 @@ const Board = () => {
       item
       flexDirection="column"
       justifyContent="space-around"
-      sx={{ ...BG_STYLE }}
+      sx={CARD_STYLE}
     >
       <Grid
         container

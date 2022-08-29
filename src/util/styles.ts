@@ -11,6 +11,8 @@ export const BG_STYLE = {
   maxWidth: "600px",
 };
 
+export const CARD_STYLE = { ...BG_STYLE, padding: "1%" };
+
 export const FONT_FAMILY = `"VPSQUNHH", "VPSQUNHT", "Roboto", sans-serif`;
 
 export const THEME = {

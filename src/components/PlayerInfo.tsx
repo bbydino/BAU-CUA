@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { useAppSelector } from "../store/hooks";
-import { BG_STYLE } from "../util";
+import { CARD_STYLE } from "../util";
 
 const PlayerInfo = () => {
   const user = useAppSelector((state) => state.user);
@@ -12,13 +12,13 @@ const PlayerInfo = () => {
       item
       flexDirection="column"
       justifyContent="flex-start"
-      sx={{ ...BG_STYLE, padding: "10px" }}
+      sx={CARD_STYLE}
     >
       <Grid item>
-        <Typography variant="h6" color="secondary">
+        <Typography variant="h6" color="primary">
           Player Summary
         </Typography>
-      </Grid>{" "}
+      </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
           NAME: {user.name}

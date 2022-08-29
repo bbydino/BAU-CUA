@@ -1,4 +1,4 @@
-import { Grid, InputAdornment, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { BoardItem, FONT_FAMILY } from "../util";
 
@@ -32,17 +32,12 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
       <Grid item>
         <TextField
           fullWidth
-          id="standard-number"
-          label="Place Your Bets!!!"
           type="number"
-          variant="standard"
+          variant="outlined"
           value={value.toString()}
           size="small"
           onChange={(event) => handleInputChange(item, event)}
           onBlur={() => handleBlur(item)}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
           inputProps={{
             min: 0,
             max: 100,

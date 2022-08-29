@@ -1,10 +1,10 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import {
-  BG_STYLE,
   BoardItem,
   BoardItemValue,
   BOARD_ITEM_MAPPING,
+  CARD_STYLE,
 } from "../util";
 import BoardItemInput from "./BoardItemInput";
 
@@ -53,8 +53,13 @@ const PlayerInput = () => {
       item
       flexDirection="column"
       justifyContent="space-around"
-      sx={{ ...BG_STYLE, width: "90%" }}
+      sx={CARD_STYLE}
     >
+      <Grid item>
+        <Typography variant="h6" color="primary">
+          Place Your Bets!
+        </Typography>
+      </Grid>
       <Grid container item flexDirection="row" justifyContent="space-evenly">
         {BOARD_ITEM_MAPPING.slice(0, 3).map(renderBoardItemInput)}
       </Grid>
