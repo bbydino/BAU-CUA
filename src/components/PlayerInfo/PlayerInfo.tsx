@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
-import { useAppSelector } from "../store/hooks";
-import { CARD_STYLE } from "../util";
+import { useAppSelector } from "../../store/hooks";
+import { CARD_STYLE } from "../../util";
 
 const PlayerInfo = () => {
   const user = useAppSelector((state) => state.user);

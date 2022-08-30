@@ -1,6 +1,6 @@
 import { Avatar, Grid, Tooltip, Typography } from "@mui/material";
 import React from "react";
-import { BoardItem as BoardItemModel, toViet } from "../util";
+import { BoardItem as BoardItemModel, toViet } from "../../util";
 
 interface BoardItemProps {
   item: BoardItemModel;

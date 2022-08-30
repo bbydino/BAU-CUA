@@ -1,6 +1,6 @@
 import { Grid, TextField } from "@mui/material";
 import React from "react";
-import { BoardItem, FONT_FAMILY } from "../util";
+import { BoardItem, FONT_FAMILY } from "../../util";
 
 interface BoardItemInputProps {
   item: BoardItem;

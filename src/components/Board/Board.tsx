@@ -5,7 +5,7 @@ import {
   BoardItemValue,
   BOARD_ITEM_MAPPING,
   CARD_STYLE,
-} from "../util";
+} from "../../util";
 import BoardItem from "./BoardItem";
 import BoardItemInput from "./BoardItemInput";
 
