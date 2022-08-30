@@ -1,6 +1,6 @@
 import { Grid, TextField } from "@mui/material";
 import React from "react";
-import { BoardItem, FONT_FAMILY } from "../../util";
+import { BoardItem } from "../../util";
 
 interface BoardItemInputProps {
   item: BoardItem;
@@ -34,7 +34,6 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
             style: {
               textAlign: "center",
               backgroundColor: item.color,
-              fontFamily: FONT_FAMILY,
             },
           }}
         />

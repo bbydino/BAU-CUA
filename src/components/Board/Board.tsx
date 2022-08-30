@@ -84,14 +84,26 @@ const Board = () => {
       </Grid>
       <Grid item container flexDirection="row">
         <Grid item xs={6}>
-          <Button variant="contained" size="large" color="secondary" fullWidth>
+          <Button
+            variant="contained"
+            size="large"
+            color="secondary"
+            fullWidth
+            sx={{ height: "100%" }}
+          >
             <Typography align="center" variant="h5" color="primary">
               <b>{toViet("SAVE BET")}</b>
             </Typography>
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Button variant="contained" size="large" color="primary" fullWidth>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            fullWidth
+            sx={{ height: "100%" }}
+          >
             <Typography align="center" variant="h5" color="secondary">
               <b>{toViet("ROLL DICE")}</b>
             </Typography>

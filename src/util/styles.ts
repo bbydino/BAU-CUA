@@ -1,13 +1,17 @@
+import { ThemeOptions } from "@mui/material";
+import React from "react";
 import bg from "../img/bg.jpg";
 import kiryuCash from "../img/kiryu-cash.jpg";
 
-export const BG_KIRYU_STYLE = {
+export const BG_KIRYU_STYLE: React.CSSProperties = {
+  height: "100vh",
   background: `url(${kiryuCash})`,
   backgroundSize: "33%",
   backgroundRepeat: "repeat",
+  overflow: "auto",
 };
 
-export const BG_STYLE = {
+export const BG_STYLE: React.CSSProperties = {
   background: `url(${bg})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -18,11 +22,22 @@ export const BG_STYLE = {
   maxWidth: "600px",
 };
 
-export const CARD_STYLE = { ...BG_STYLE, padding: "1%" };
+export const CARD_STYLE: React.CSSProperties = { ...BG_STYLE, padding: "1%" };
 
-export const FONT_FAMILY = `"VPSQUNHH", "VPSQUNHT", "Roboto", sans-serif`;
+export const FONT_FAMILY: string = [
+  "VPSQUNHH",
+  "VPSQUNHT",
+  "Roboto",
+  "Oxygen",
+  "Ubuntu",
+  "Cantarell",
+  "Fira Sans",
+  "Droid Sans",
+  "Helvetica Neue",
+  "sans-serif",
+].join(",");
 
-export const THEME = {
+export const THEME: ThemeOptions = {
   palette: {
     primary: {
       main: "#C60000",
@@ -32,17 +47,6 @@ export const THEME = {
     },
   },
   typography: {
-    fontFamily: [
-      "VPSQUNHH",
-      "VPSQUNHT",
-      "Roboto",
-      "Oxygen",
-      "Ubuntu",
-      "Cantarell",
-      "Fira Sans",
-      "Droid Sans",
-      "Helvetica Neue",
-      "sans-serif",
-    ].join(","),
+    fontFamily: FONT_FAMILY,
   },
 };
