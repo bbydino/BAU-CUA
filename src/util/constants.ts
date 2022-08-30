@@ -23,6 +23,31 @@ export const BOARD_ITEM_NAMES_VIET = {
   DEER: "nai",
 };
 
+/* ĐÁNH LÚC LẮC */
+const DANH_LUC_LAC = String.fromCharCode(
+  199,
+  193,
+  110,
+  104,
+  32,
+  108,
+  218,
+  67,
+  32,
+  108,
+  161,
+  67
+);
+
+/*ĐÁNH CUỘC */
+const DANH_CUOC = String.fromCharCode(199, 193, 110, 104, 32, 99, 117, 182, 99);
+
+export const ENGLISH_TO_VIET = {
+  ...BOARD_ITEM_NAMES_VIET,
+  "ROLL DICE": DANH_LUC_LAC,
+  "SAVE BET": DANH_CUOC,
+};
+
 export const BOARD_ITEM_IMAGES = {
   SHRIMP: shrimpImg,
   CRAB: crabImg,

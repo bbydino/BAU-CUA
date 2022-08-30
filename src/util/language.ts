@@ -1,5 +1,5 @@
-import { BoardItemName, BOARD_ITEM_NAMES_VIET } from ".";
+import { BoardItemName, ENGLISH_TO_VIET } from ".";
 
 export const toViet = (eng: string) => {
-  return BOARD_ITEM_NAMES_VIET[eng.toUpperCase() as BoardItemName] ?? eng;
+  return ENGLISH_TO_VIET[eng.toUpperCase() as BoardItemName] ?? eng;
 };

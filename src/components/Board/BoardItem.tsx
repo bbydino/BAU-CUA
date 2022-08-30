@@ -38,7 +38,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
             variant="body2"
             color="secondary"
           >
-            <span>{item.name}</span>
+            <span>{toViet(item.name)}</span>
           </Typography>
         </Tooltip>
       </Grid>
@@ -52,7 +52,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
                 variant="body2"
                 color="secondary"
               >
-                <span>{toViet(item.name)}</span>
+                <span>{item.name}</span>
               </Typography>
             </React.Fragment>
           }

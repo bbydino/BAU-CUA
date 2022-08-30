@@ -5,6 +5,7 @@ import {
   BoardItemValue,
   BOARD_ITEM_MAPPING,
   CARD_STYLE,
+  toViet,
 } from "../../util";
 import BoardItem from "./BoardItem";
 import BoardItemInput from "./BoardItemInput";
@@ -85,14 +86,14 @@ const Board = () => {
         <Grid item xs={6}>
           <Button variant="contained" size="large" color="secondary" fullWidth>
             <Typography align="center" variant="h5" color="primary">
-              <b>SAVE BET</b>
+              <b>{toViet("SAVE BET")}</b>
             </Typography>
           </Button>
         </Grid>
         <Grid item xs={6}>
           <Button variant="contained" size="large" color="primary" fullWidth>
             <Typography align="center" variant="h5" color="secondary">
-              <b>ROLL DICE</b>
+              <b>{toViet("ROLL DICE")}</b>
             </Typography>
           </Button>
         </Grid>
