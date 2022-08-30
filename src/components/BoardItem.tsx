@@ -42,34 +42,36 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
           </Typography>
         </Tooltip>
       </Grid>
-      <Tooltip
-        title={
-          <React.Fragment>
-            <Typography
-              align="center"
-              width="100%"
-              variant="body2"
-              color="secondary"
-            >
-              <span>{toViet(item.name)}</span>
-            </Typography>
-          </React.Fragment>
-        }
-        placement="top"
-      >
-        <Avatar
-          src={item.img}
-          alt={item.name}
-          sx={{
-            width: "20vw",
-            height: "20vw",
-            maxHeight: "169px",
-            maxWidth: "169px",
-            border: "6.9px solid " + item.color,
-          }}
-          onClick={() => handleItemClick(item.name)}
-        />
-      </Tooltip>
+      <Grid item>
+        <Tooltip
+          title={
+            <React.Fragment>
+              <Typography
+                align="center"
+                width="100%"
+                variant="body2"
+                color="secondary"
+              >
+                <span>{toViet(item.name)}</span>
+              </Typography>
+            </React.Fragment>
+          }
+          placement="top"
+        >
+          <Avatar
+            src={item.img}
+            alt={item.name}
+            sx={{
+              width: "20vw",
+              height: "20vw",
+              maxHeight: "169px",
+              maxWidth: "169px",
+              border: "6.9px solid " + item.color,
+            }}
+            onClick={() => handleItemClick(item.name)}
+          />
+        </Tooltip>
+      </Grid>
     </Grid>
   );
 };

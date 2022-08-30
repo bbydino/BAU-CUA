@@ -1,4 +1,11 @@
 import bg from "../img/bg.jpg";
+import kiryuCash from "../img/kiryu-cash.jpg";
+
+export const BG_KIRYU_STYLE = {
+  background: `url(${kiryuCash})`,
+  backgroundSize: "33%",
+  backgroundRepeat: "repeat",
+};
 
 export const BG_STYLE = {
   background: `url(${bg})`,

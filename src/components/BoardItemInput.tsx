@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import React from "react";
 import { BoardItem, FONT_FAMILY } from "../util";
 
@@ -19,16 +19,6 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
 }) => {
   return (
     <Grid item container flexDirection="column" justifyContent="center" xs={4}>
-      <Grid item>
-        <Typography
-          align="center"
-          width="100%"
-          variant="body2"
-          color="secondary"
-        >
-          <span>{item.name}</span>
-        </Typography>
-      </Grid>
       <Grid item>
         <TextField
           fullWidth
