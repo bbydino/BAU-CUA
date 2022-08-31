@@ -116,3 +116,6 @@ export const BOARD_ITEM_MAPPING: BoardItem[] = [
     idx: 5,
   },
 ];
+
+export const MIN_BET_AMOUNT = 0;
+export const MAX_BET_AMOUNT = 1000;

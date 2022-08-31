@@ -1,11 +1,10 @@
 import { Grid, TextField } from "@mui/material";
 import React from "react";
-import { BoardItem } from "../../util";
+import { BoardItem, MAX_BET_AMOUNT, MIN_BET_AMOUNT } from "../../util";
 
 interface BoardItemInputProps {
   item: BoardItem;
   value: number;
-  handleBlur: (item: BoardItem) => void;
   handleInputChange: (
     item: BoardItem,
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -14,7 +13,6 @@ interface BoardItemInputProps {
 const BoardItemInput: React.FC<BoardItemInputProps> = ({
   item,
   value,
-  handleBlur,
   handleInputChange,
 }) => {
   return (
@@ -27,10 +25,9 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
           value={value.toString()}
           size="small"
           onChange={(event) => handleInputChange(item, event)}
-          onBlur={() => handleBlur(item)}
           inputProps={{
-            min: 0,
-            max: 100,
+            min: MIN_BET_AMOUNT,
+            max: MAX_BET_AMOUNT,
             style: {
               textAlign: "center",
               backgroundColor: item.color,

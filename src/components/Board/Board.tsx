@@ -5,6 +5,8 @@ import {
   BoardItemValue,
   BOARD_ITEM_MAPPING,
   CARD_STYLE,
+  MAX_BET_AMOUNT,
+  MIN_BET_AMOUNT,
   toViet,
 } from "../../util";
 import BoardItem from "./BoardItem";
@@ -34,7 +36,6 @@ const Board = () => {
       item={item}
       value={values[item.idx].value}
       handleInputChange={handleInputChange}
-      handleBlur={handleBlur}
     />
   );
 
@@ -42,22 +43,18 @@ const Board = () => {
     item: BoardItemModel,
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    const value = Number(event.target.value);
     let newValues = values.slice();
-    newValues[item.idx].value =
-      event.target.value === "" ? 0 : Number(event.target.value);
-    setValues(newValues);
-  };
-
-  const handleBlur = (item: BoardItemModel) => {
-    const value = values[item.idx].value;
-    let newValues = values.slice();
-    if (value < 0) {
-      newValues[item.idx].value = 0;
-      setValues(newValues);
-    } else if (value > 100) {
-      newValues[item.idx].value = 100;
-      setValues(newValues);
+    if (value === undefined) {
+      // do nothing
+    } else if (value < MIN_BET_AMOUNT) {
+      newValues[item.idx].value = MIN_BET_AMOUNT;
+    } else if (value > MAX_BET_AMOUNT) {
+      newValues[item.idx].value = MAX_BET_AMOUNT;
+    } else {
+      newValues[item.idx].value = value;
     }
+    setValues(newValues);
   };
 
   return (
