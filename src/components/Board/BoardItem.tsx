@@ -1,12 +1,15 @@
 import { Avatar, Grid, Tooltip, Typography } from "@mui/material";
 import React from "react";
-import { BoardItem as BoardItemModel, toViet } from "../../util";
+import { useAppSelector } from "../../store/hooks";
+import { BoardItem as BoardItemModel, t } from "../../util";
 
 interface BoardItemProps {
   item: BoardItemModel;
   handleItemClick: (item: string) => void;
 }
 const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
+  const user = useAppSelector((state) => state.user);
+
   return (
     <Grid
       item
@@ -26,37 +29,11 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
                 variant="body2"
                 color="secondary"
               >
-                <span>{toViet(item.name)}</span>
+                {t(item.name, user.lang)}
               </Typography>
             </React.Fragment>
           }
           placement="bottom"
-        >
-          <Typography
-            align="center"
-            width="100%"
-            variant="body2"
-            color="secondary"
-          >
-            <span>{toViet(item.name)}</span>
-          </Typography>
-        </Tooltip>
-      </Grid>
-      <Grid item>
-        <Tooltip
-          title={
-            <React.Fragment>
-              <Typography
-                align="center"
-                width="100%"
-                variant="body2"
-                color="secondary"
-              >
-                <span>{item.name}</span>
-              </Typography>
-            </React.Fragment>
-          }
-          placement="top"
         >
           <Avatar
             src={item.img}

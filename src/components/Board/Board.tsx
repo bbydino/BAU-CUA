@@ -1,5 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../../store/hooks";
 import {
   BoardItem as BoardItemModel,
   BoardItemValue,
@@ -7,13 +8,15 @@ import {
   CARD_STYLE,
   MAX_BET_AMOUNT,
   MIN_BET_AMOUNT,
-  toViet,
+  t,
 } from "../../util";
 import BoardItem from "./BoardItem";
 import BoardItemInput from "./BoardItemInput";
 import Dice from "./Dice";
 
 const Board = () => {
+  const user = useAppSelector((state) => state.user);
+
   const [values, setValues] = useState<BoardItemValue[]>(
     BOARD_ITEM_MAPPING.map((item) => ({ item: item, value: 0 }))
   );
@@ -146,7 +149,7 @@ const Board = () => {
             sx={{ height: "100%" }}
           >
             <Typography align="center" variant="h5" color="primary">
-              <b>{toViet("SAVE BET")}</b>
+              <b>{t("SAVE BET", user.lang)}</b>
             </Typography>
           </Button>
         </Grid>
@@ -161,7 +164,7 @@ const Board = () => {
             sx={{ height: "100%" }}
           >
             <Typography align="center" variant="h5" color="secondary">
-              <b>{toViet("ROLL DICE")}</b>
+              <b>{t("ROLL DICE", user.lang)}</b>
             </Typography>
           </Button>
         </Grid>
