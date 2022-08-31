@@ -1,5 +1,5 @@
 import { Button, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BoardItem as BoardItemModel,
   BoardItemValue,
@@ -11,12 +11,51 @@ import {
 } from "../../util";
 import BoardItem from "./BoardItem";
 import BoardItemInput from "./BoardItemInput";
+import Dice from "./Dice";
 
 const Board = () => {
   const [values, setValues] = useState<BoardItemValue[]>(
     BOARD_ITEM_MAPPING.map((item) => ({ item: item, value: 0 }))
   );
+
+  const [dice, setDice] = useState<BoardItemModel[]>([
+    BOARD_ITEM_MAPPING[4],
+    BOARD_ITEM_MAPPING[4],
+    BOARD_ITEM_MAPPING[4],
+  ]);
+
+  const [isDiceRolling, setIsDiceRolling] = useState<boolean>(false);
+  const [isBetSaved, setIsBetSaved] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isDiceRolling) {
+      const intervalId = setInterval(() => {
+        setDice([
+          BOARD_ITEM_MAPPING[getRandomDiceIdx()],
+          BOARD_ITEM_MAPPING[getRandomDiceIdx()],
+          BOARD_ITEM_MAPPING[getRandomDiceIdx()],
+        ]);
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(intervalId);
+        setIsDiceRolling(false);
+        setIsBetSaved(false);
+      }, 1000);
+
+      return () => {
+        clearInterval(intervalId);
+        setIsDiceRolling(false);
+        setIsBetSaved(false);
+      };
+    }
+  }, [isDiceRolling]);
+
+  console.log(dice);
   console.log(values);
+
+  const getRandomDiceIdx = () =>
+    Math.floor(Math.random() * BOARD_ITEM_MAPPING.length);
 
   const handleItemClick = (name: string) => {
     console.log("CLICK:", name);
@@ -36,6 +75,7 @@ const Board = () => {
       item={item}
       value={values[item.idx].value}
       handleInputChange={handleInputChange}
+      disabled={isDiceRolling || isBetSaved}
     />
   );
 
@@ -57,14 +97,30 @@ const Board = () => {
     setValues(newValues);
   };
 
+  const renderDice = (item: BoardItemModel, idx: number) => (
+    <Dice key={"dice" + idx} item={item} />
+  );
+
+  const saveBet = () => {
+    setIsBetSaved(true);
+  };
+
+  const rollDice = () => {
+    setIsDiceRolling(true);
+  };
+
   return (
     <Grid
       container
       item
       flexDirection="column"
       justifyContent="space-around"
+      spacing={1}
       sx={CARD_STYLE}
     >
+      <Grid container item flexDirection="row" justifyContent="center">
+        {dice.map(renderDice)}
+      </Grid>
       <Grid
         container
         item
@@ -85,6 +141,7 @@ const Board = () => {
             variant="contained"
             size="large"
             color="secondary"
+            onClick={saveBet}
             fullWidth
             sx={{ height: "100%" }}
           >
@@ -98,7 +155,9 @@ const Board = () => {
             variant="contained"
             size="large"
             color="primary"
+            onClick={rollDice}
             fullWidth
+            disabled={!isBetSaved}
             sx={{ height: "100%" }}
           >
             <Typography align="center" variant="h5" color="secondary">
