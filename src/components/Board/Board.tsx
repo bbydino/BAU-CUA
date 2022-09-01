@@ -127,6 +127,14 @@ const Board = () => {
     setIsDiceRolling(true);
   };
 
+  const resetValues = () => {
+    let newValues = values.slice();
+    for (const newValue of newValues) {
+      newValues[newValue.item.idx].value = 0;
+    }
+    setValues(newValues);
+  };
+
   return (
     <Grid
       container
@@ -134,6 +142,8 @@ const Board = () => {
       flexDirection="column"
       justifyContent="space-around"
       rowSpacing={1}
+      xl={8}
+      sm={9}
       sx={CARD_STYLE}
     >
       <Grid container item flexDirection="row" justifyContent="center">
@@ -171,13 +181,13 @@ const Board = () => {
           <Button
             variant="contained"
             size="large"
-            color="secondary"
+            color="success"
             onClick={saveBet}
             fullWidth
-            disabled={isBetError}
+            disabled={isBetError || isDiceRolling}
             sx={{ height: "100%" }}
           >
-            <Typography align="center" variant="h6" color="primary">
+            <Typography align="center" variant="h6" color="secondary">
               <b>{t("SAVE BET", user.lang)}</b>
             </Typography>
           </Button>
@@ -186,17 +196,32 @@ const Board = () => {
           <Button
             variant="contained"
             size="large"
-            color="primary"
-            onClick={rollDice}
+            color="error"
+            onClick={resetValues}
             fullWidth
-            disabled={!isBetSaved}
+            disabled={isBetSaved || isDiceRolling}
             sx={{ height: "100%" }}
           >
             <Typography align="center" variant="h6" color="secondary">
-              <b>{t("ROLL DICE", user.lang)}</b>
+              <b>{t("CLEAR BET", user.lang)}</b>
             </Typography>
           </Button>
         </Grid>
+      </Grid>
+      <Grid item>
+        <Button
+          variant="contained"
+          size="large"
+          color="secondary"
+          onClick={rollDice}
+          fullWidth
+          disabled={!isBetSaved}
+          sx={{ height: "100%" }}
+        >
+          <Typography align="center" variant="h6" color="primary">
+            <b>{t("ROLL DICE", user.lang)}</b>
+          </Typography>
+        </Button>
       </Grid>
     </Grid>
   );
@@ -207,13 +232,9 @@ const getTotalBet = (values: BoardItemValue[]) =>
 
 const getNetMoney = (values: BoardItemValue[], dice: BoardItemModel[]) => {
   let netMoney = 0;
-  values.forEach((value) => {
-    if (dice.includes(value.item)) {
-      netMoney += value.value;
-    } else {
-      netMoney -= value.value;
-    }
-  });
+  for (const value of values) {
+    netMoney += dice.includes(value.item) ? value.value : -value.value;
+  }
   return netMoney;
 };
 

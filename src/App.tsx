@@ -22,11 +22,11 @@ const App = () => {
             justifyContent="center"
             rowSpacing={2}
           >
-            <Grid item>
+            <Grid item xs={12}>
               <Typography
                 variant="h3"
                 color="primary"
-                padding="5%"
+                padding="2%"
                 align="center"
                 sx={{ textShadow: "3px 3px 1px #000" }}
               >
