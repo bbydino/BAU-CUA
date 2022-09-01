@@ -47,7 +47,7 @@ const PlayerInfo = () => {
       >
         <Grid item>
           <Typography variant="body2" color="secondary">
-            {t("LANGUAGE", user.lang) + ":"}
+            🌐 {t("LANGUAGE", user.lang) + ":"}
           </Typography>
         </Grid>
         <Grid item>
@@ -73,22 +73,22 @@ const PlayerInfo = () => {
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
-          {t("NAME", user.lang) + ": " + user.name}
+          📛 {t("NAME", user.lang) + ": " + user.name}
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
-          {t("MONEY", user.lang) + ": $" + formatMoney(user.money)}
+          💸 {t("MONEY", user.lang) + ": $" + formatMoney(user.money)}
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
-          WIN STREAK: {user.winStreak}
+          🔥 {t("WIN STREAK", user.lang) + ": " + user.winStreak}
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
-          LOSING STREAK: {user.loseStreak}
+          😔 {t("LOSING STREAK", user.lang) + ": " + user.losingStreak}
         </Typography>
       </Grid>
       <Grid item>

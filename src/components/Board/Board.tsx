@@ -2,7 +2,11 @@ import { Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
-import { setMoney } from "../../store/slices/userSlice";
+import {
+  setLosingStreak,
+  setMoney,
+  setWinStreak,
+} from "../../store/slices/userSlice";
 import {
   BoardItem as BoardItemModel,
   BoardItemValue,
@@ -65,7 +69,17 @@ const Board = () => {
 
   useEffect(() => {
     if (checkDice && user) {
-      dispatch(setMoney(user.money + getNetMoney(values, dice)));
+      const netMoney = getNetMoney(values, dice);
+      dispatch(setMoney(user.money + netMoney));
+
+      if (netMoney > 0) {
+        dispatch(setWinStreak(user.winStreak + 1));
+        dispatch(setLosingStreak(0));
+      } else if (netMoney < 0) {
+        dispatch(setLosingStreak(user.losingStreak + 1));
+        dispatch(setWinStreak(0));
+      }
+
       setCheckDice(false);
     }
   }, [checkDice, dice, dispatch, user, values]);
