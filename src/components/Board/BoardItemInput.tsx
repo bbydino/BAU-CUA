@@ -1,6 +1,6 @@
 import { Grid, TextField } from "@mui/material";
 import React from "react";
-import { BoardItem, MAX_BET_AMOUNT, MIN_BET_AMOUNT } from "../../util";
+import { BoardItem } from "../../util";
 
 interface BoardItemInputProps {
   item: BoardItem;
@@ -29,8 +29,6 @@ const BoardItemInput: React.FC<BoardItemInputProps> = ({
           onChange={(event) => handleInputChange(item, event)}
           disabled={disabled}
           inputProps={{
-            min: MIN_BET_AMOUNT,
-            max: MAX_BET_AMOUNT,
             style: {
               textAlign: "center",
               backgroundColor: item.color,

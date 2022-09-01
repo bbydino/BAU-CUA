@@ -6,8 +6,7 @@ import {
   BoardItemValue,
   BOARD_ITEM_MAPPING,
   CARD_STYLE,
-  MAX_BET_AMOUNT,
-  MIN_BET_AMOUNT,
+  formatMoney,
   t,
 } from "../../util";
 import BoardItem from "./BoardItem";
@@ -29,6 +28,7 @@ const Board = () => {
 
   const [isDiceRolling, setIsDiceRolling] = useState<boolean>(false);
   const [isBetSaved, setIsBetSaved] = useState<boolean>(false);
+  const [isBetError, setIsBetError] = useState<boolean>(false);
 
   useEffect(() => {
     if (isDiceRolling) {
@@ -57,13 +57,6 @@ const Board = () => {
   console.log(dice);
   console.log(values);
 
-  const getRandomDiceIdx = () =>
-    Math.floor(Math.random() * BOARD_ITEM_MAPPING.length);
-
-  const handleItemClick = (name: string) => {
-    console.log("CLICK:", name);
-  };
-
   const renderBoardItem = (item: BoardItemModel) => (
     <BoardItem
       key={item.name + "boardItem"}
@@ -82,6 +75,10 @@ const Board = () => {
     />
   );
 
+  const renderDice = (item: BoardItemModel, idx: number) => (
+    <Dice key={"dice" + idx} item={item} />
+  );
+
   const handleInputChange = (
     item: BoardItemModel,
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -90,19 +87,23 @@ const Board = () => {
     let newValues = values.slice();
     if (value === undefined) {
       // do nothing
-    } else if (value < MIN_BET_AMOUNT) {
-      newValues[item.idx].value = MIN_BET_AMOUNT;
-    } else if (value > MAX_BET_AMOUNT) {
-      newValues[item.idx].value = MAX_BET_AMOUNT;
     } else {
       newValues[item.idx].value = value;
     }
+    setIsBetError(checkBoardForErrors());
     setValues(newValues);
   };
 
-  const renderDice = (item: BoardItemModel, idx: number) => (
-    <Dice key={"dice" + idx} item={item} />
-  );
+  const handleItemClick = (name: string) => {
+    console.log("CLICK:", name);
+  };
+
+  const getRandomDiceIdx = () =>
+    Math.floor(Math.random() * BOARD_ITEM_MAPPING.length);
+
+  const getTotalBet = () => values.reduce((a, b) => a + b.value, 0);
+
+  const checkBoardForErrors = () => getTotalBet() > user.money;
 
   const saveBet = () => {
     setIsBetSaved(true);
@@ -118,11 +119,24 @@ const Board = () => {
       item
       flexDirection="column"
       justifyContent="space-around"
-      spacing={1}
+      spacing={2}
       sx={CARD_STYLE}
     >
       <Grid container item flexDirection="row" justifyContent="center">
         {dice.map(renderDice)}
+      </Grid>
+      <Grid item>
+        <Typography
+          align="center"
+          variant="h5"
+          color={!isBetError ? "secondary" : "error"}
+        >
+          <b>
+            {t(!isBetError ? "TOTAL BET" : "INVALID BET", user.lang) +
+              ": $" +
+              formatMoney(getTotalBet())}
+          </b>
+        </Typography>
       </Grid>
       <Grid
         container
@@ -146,6 +160,7 @@ const Board = () => {
             color="secondary"
             onClick={saveBet}
             fullWidth
+            disabled={isBetError}
             sx={{ height: "100%" }}
           >
             <Typography align="center" variant="h5" color="primary">
