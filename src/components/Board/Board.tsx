@@ -133,7 +133,7 @@ const Board = () => {
       item
       flexDirection="column"
       justifyContent="space-around"
-      spacing={2}
+      rowSpacing={1}
       sx={CARD_STYLE}
     >
       <Grid container item flexDirection="row" justifyContent="center">
@@ -142,7 +142,7 @@ const Board = () => {
       <Grid item>
         <Typography
           align="center"
-          variant="h5"
+          variant="h6"
           color={!isBetError ? "secondary" : "error"}
         >
           <b>
@@ -177,7 +177,7 @@ const Board = () => {
             disabled={isBetError}
             sx={{ height: "100%" }}
           >
-            <Typography align="center" variant="h5" color="primary">
+            <Typography align="center" variant="h6" color="primary">
               <b>{t("SAVE BET", user.lang)}</b>
             </Typography>
           </Button>
@@ -192,7 +192,7 @@ const Board = () => {
             disabled={!isBetSaved}
             sx={{ height: "100%" }}
           >
-            <Typography align="center" variant="h5" color="secondary">
+            <Typography align="center" variant="h6" color="secondary">
               <b>{t("ROLL DICE", user.lang)}</b>
             </Typography>
           </Button>

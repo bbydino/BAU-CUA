@@ -28,7 +28,7 @@ const PlayerInfo = () => {
       item
       flexDirection="column"
       justifyContent="flex-start"
-      spacing={1}
+      rowSpacing={1}
       sx={CARD_STYLE}
     >
       <Grid item>
@@ -36,7 +36,13 @@ const PlayerInfo = () => {
           Player Summary
         </Typography>
       </Grid>
-      <Grid item container flexDirection="row" alignItems="center" spacing={2}>
+      <Grid
+        item
+        container
+        flexDirection="row"
+        alignItems="center"
+        columnSpacing={1}
+      >
         <Grid item>
           <Typography variant="body2" color="secondary">
             {t("LANGUAGE", user.lang) + ":"}

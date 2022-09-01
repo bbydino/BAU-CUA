@@ -16,22 +16,25 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <div className="bau-cua" style={BG_KIRYU_STYLE}>
-          <Grid container flexDirection="row" spacing={1}>
-            <Grid container item justifyContent="center">
+          <Grid
+            container
+            flexDirection="row"
+            justifyContent="center"
+            rowSpacing={2}
+          >
+            <Grid item>
               <Typography
                 variant="h3"
                 color="primary"
-                padding="2%"
+                padding="5%"
                 align="center"
                 sx={{ textShadow: "3px 3px 1px #000" }}
               >
                 <b>BÀU CUA Gà TÔM CÁ NAI</b>
               </Typography>
             </Grid>
-            <Grid container item justifyContent="center">
+            <Grid container item justifyContent="center" alignItems="stretch">
               <Board />
-            </Grid>
-            <Grid container item justifyContent="center">
               <PlayerInfo />
             </Grid>
           </Grid>
