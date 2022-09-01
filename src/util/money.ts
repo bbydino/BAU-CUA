@@ -1,4 +1,4 @@
-export function formatMoney(num: number, digits = 3) {
+export function formatMoney(num: number, digits = 2) {
   /**
    * For more symbols for currency: https://idleminertycoon.fandom.com/wiki/Currency_Display
    */
