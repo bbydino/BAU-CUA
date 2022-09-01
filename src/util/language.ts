@@ -42,6 +42,7 @@ const BOARD_ITEMS_VIET = {
     67
   ), // ĐÁNH LÚC LẮC
   "SAVE BET": String.fromCharCode(199, 193, 110, 104, 32, 99, 208, 174, 99), // ĐÁNH CƯỢC
+  "CLEAR BET": String.fromCharCode(99, 104, 168, 73, 32, 99, 208, 174, 99), // chùi cược
   "TOTAL BET": String.fromCharCode(
     84,
     176,
