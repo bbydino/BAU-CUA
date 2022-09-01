@@ -40,25 +40,48 @@ const BOARD_ITEMS_VIET = {
     108,
     161,
     67
-  ) /* ĐÁNH LÚC LẮC */,
-  "SAVE BET": String.fromCharCode(
-    199,
-    193,
-    110,
-    104,
+  ), // ĐÁNH LÚC LẮC
+  "SAVE BET": String.fromCharCode(199, 193, 110, 104, 32, 99, 208, 174, 99), // ĐÁNH CƯỢC
+  "TOTAL BET": String.fromCharCode(
+    84,
+    176,
+    78,
+    71,
+    32,
+    84,
+    73,
+    352,
+    78,
     32,
     99,
-    117,
-    182,
+    208,
+    174,
     99
-  ) /*ĐÁNH CUỘC */,
+  ), // tổng tiền cược
+  "INVALID BET": String.fromCharCode(
+    99,
+    208,
+    174,
+    99,
+    32,
+    66,
+    402,
+    84,
+    32,
+    72,
+    174,
+    80,
+    32,
+    76,
+    6
+  ), // cược bất hợp lệ
 };
 
 const PLAYER_INFO_VIET = {
   "PLAYER SUMMARY": "",
   LANGUAGE: String.fromCharCode(110, 103, 212, 110, 32, 110, 103, 29), // NGÔN NGỮ
-  NAME: "",
-  MONEY: "",
+  NAME: String.fromCharCode(84, 234, 78), // tên
+  MONEY: String.fromCharCode(84, 73, 352, 78), // tiền
   "WIN STREAK": "",
   "LOSING STREAK": "",
   "MOST CHOSEN": "",
