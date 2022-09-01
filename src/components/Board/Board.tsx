@@ -1,12 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
+import { setMoney } from "../../store/slices/userSlice";
 import {
   BoardItem as BoardItemModel,
   BoardItemValue,
   BOARD_ITEM_MAPPING,
   CARD_STYLE,
   formatMoney,
+  MIN_BET_AMOUNT,
   t,
 } from "../../util";
 import BoardItem from "./BoardItem";
@@ -15,9 +18,13 @@ import Dice from "./Dice";
 
 const Board = () => {
   const user = useAppSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [values, setValues] = useState<BoardItemValue[]>(
-    BOARD_ITEM_MAPPING.map((item) => ({ item: item, value: 0 }))
+    BOARD_ITEM_MAPPING.map((item) => ({
+      item: item,
+      value: 0,
+    }))
   );
 
   const [dice, setDice] = useState<BoardItemModel[]>([
@@ -29,6 +36,7 @@ const Board = () => {
   const [isDiceRolling, setIsDiceRolling] = useState<boolean>(false);
   const [isBetSaved, setIsBetSaved] = useState<boolean>(false);
   const [isBetError, setIsBetError] = useState<boolean>(false);
+  const [checkDice, setCheckDice] = useState<boolean>(false);
 
   useEffect(() => {
     if (isDiceRolling) {
@@ -44,6 +52,7 @@ const Board = () => {
         clearInterval(intervalId);
         setIsDiceRolling(false);
         setIsBetSaved(false);
+        setCheckDice(true);
       }, 1000);
 
       return () => {
@@ -54,8 +63,16 @@ const Board = () => {
     }
   }, [isDiceRolling]);
 
-  console.log(dice);
-  console.log(values);
+  useEffect(() => {
+    if (checkDice && user) {
+      dispatch(setMoney(user.money + getNetMoney(values, dice)));
+      setCheckDice(false);
+    }
+  }, [checkDice, dice, dispatch, user, values]);
+
+  useEffect(() => {
+    setIsBetError(getTotalBet(values) > user.money);
+  }, [user.money, values]);
 
   const renderBoardItem = (item: BoardItemModel) => (
     <BoardItem
@@ -87,10 +104,11 @@ const Board = () => {
     let newValues = values.slice();
     if (value === undefined) {
       // do nothing
+    } else if (value < MIN_BET_AMOUNT) {
+      newValues[item.idx].value = MIN_BET_AMOUNT;
     } else {
       newValues[item.idx].value = value;
     }
-    setIsBetError(checkBoardForErrors());
     setValues(newValues);
   };
 
@@ -100,10 +118,6 @@ const Board = () => {
 
   const getRandomDiceIdx = () =>
     Math.floor(Math.random() * BOARD_ITEM_MAPPING.length);
-
-  const getTotalBet = () => values.reduce((a, b) => a + b.value, 0);
-
-  const checkBoardForErrors = () => getTotalBet() > user.money;
 
   const saveBet = () => {
     setIsBetSaved(true);
@@ -134,7 +148,7 @@ const Board = () => {
           <b>
             {t(!isBetError ? "TOTAL BET" : "INVALID BET", user.lang) +
               ": $" +
-              formatMoney(getTotalBet())}
+              formatMoney(getTotalBet(values))}
           </b>
         </Typography>
       </Grid>
@@ -186,6 +200,21 @@ const Board = () => {
       </Grid>
     </Grid>
   );
+};
+
+const getTotalBet = (values: BoardItemValue[]) =>
+  values.reduce((a, b) => a + b.value, 0);
+
+const getNetMoney = (values: BoardItemValue[], dice: BoardItemModel[]) => {
+  let netMoney = 0;
+  values.forEach((value) => {
+    if (dice.includes(value.item)) {
+      netMoney += value.value;
+    } else {
+      netMoney -= value.value;
+    }
+  });
+  return netMoney;
 };
 
 export default Board;

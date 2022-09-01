@@ -31,7 +31,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setMoney: (state, action: PayloadAction<number>) => {
-      state.money += action.payload;
+      state.money = action.payload;
     },
     setLang: (state, action: PayloadAction<Languages>) => {
       state.lang = action.payload;

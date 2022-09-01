@@ -9,13 +9,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
 import { setLang } from "../../store/slices/userSlice";
-import { CARD_STYLE, Languages, t } from "../../util";
+import { CARD_STYLE, formatMoney, Languages, t } from "../../util";
 
 const PlayerInfo = () => {
   const user = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  console.log(user);
 
   const changeLang = (event: SelectChangeEvent<Languages>) => {
     const newLang = event.target.value as Languages;
@@ -30,6 +28,7 @@ const PlayerInfo = () => {
       item
       flexDirection="column"
       justifyContent="flex-start"
+      spacing={1}
       sx={CARD_STYLE}
     >
       <Grid item>
@@ -66,27 +65,40 @@ const PlayerInfo = () => {
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
-          NAME: {user.name}
+          {t("NAME", user.lang) + ": " + user.name}
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography variant="body2" color="secondary">
-          MONEY: {user.money}
+          {t("MONEY", user.lang) + ": $" + formatMoney(user.money)}
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography variant="body2" color="secondary">
           WIN STREAK: {user.winStreak}
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography variant="body2" color="secondary">
           LOSING STREAK: {user.loseStreak}
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography variant="body2" color="secondary">
           MOST CHOSEN: {user.mostChosen}
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography variant="body2" color="secondary">
           LUCKY ANIMAL: {user.mostWon}
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography variant="body2" color="secondary">
           UNLUCKY ANIMAL: {user.mostLost}
         </Typography>
       </Grid>
+      <Grid item></Grid>
     </Grid>
   );
 };
