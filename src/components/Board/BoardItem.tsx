@@ -22,18 +22,17 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
       <Grid item>
         <Tooltip
           title={
-            <React.Fragment>
-              <Typography
-                align="center"
-                width="100%"
-                variant="body2"
-                color="secondary"
-              >
-                {t(item.name, user.lang)}
-              </Typography>
-            </React.Fragment>
+            <Typography
+              align="center"
+              width="100%"
+              variant="body2"
+              color="secondary"
+            >
+              {t(item.name, user.lang)}
+            </Typography>
           }
           placement="bottom"
+          followCursor
         >
           <Avatar
             src={item.img}
