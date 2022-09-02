@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true, // allow for `import` statements
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext", // allow for `import` statements
+    "baseUrl": "src",
+    "rootDir": "src",
+    "outDir": "build", // Types should go into this directory.
+    "declaration": true, // Generate d.ts files
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false // Allow "tsc" to create "build" folder for prod
+  },
+  "include": ["src/*"]
+}
