@@ -40,30 +40,13 @@ const BOARD_ITEMS_VIET = {
     108,
     161,
     67
-  ), // ĐÁNH LÚC LẮC
-  "SAVE BET": String.fromCharCode(199, 193, 110, 104, 32, 99, 208, 174, 99), // ĐÁNH CƯỢC
-  "CLEAR BET": String.fromCharCode(99, 104, 168, 73, 32, 99, 208, 174, 99), // chùi cược
-  "TOTAL BET": String.fromCharCode(
-    84,
-    176,
-    78,
-    71,
-    32,
-    84,
-    73,
-    352,
-    78,
-    32,
-    99,
-    208,
-    174,
-    99
-  ), // tổng tiền cược
+  ), // ĐÁNH LÚC LẮC XÍ NGẦU
+  "SAVE BET": String.fromCharCode(199, 193, 110, 104, 32, 99, 193), // ĐÁNH CÁ
+  "CLEAR BET": String.fromCharCode(66, 189, 32, 84, 73, 352, 78, 32, 99, 193), // BỎ TIỀN CÁ
+  "TOTAL BET": String.fromCharCode(84, 73, 352, 78, 32, 99, 193), // TIỀN CÁ
   "INVALID BET": String.fromCharCode(
     99,
-    208,
-    174,
-    99,
+    193,
     32,
     66,
     402,
@@ -75,7 +58,7 @@ const BOARD_ITEMS_VIET = {
     32,
     76,
     6
-  ), // cược bất hợp lệ
+  ), // cá bất hợp lệ
 };
 
 const PLAYER_INFO_VIET = {
@@ -94,6 +77,7 @@ const LANGUAGE_NAMES_VIET = {
   ENGLISH: String.fromCharCode(84, 73, 8240, 110, 103, 32, 65, 110, 104), // TIẾNG ANH
   VIETNAMESE: String.fromCharCode(84, 73, 8240, 110, 103, 32, 118, 73, 6, 84), // TIẾNG VIỆT
 };
+
 const INSTRUCTIONS_VIET = {
   "HOW TO PLAY": "",
   "THERE ARE SIX ITEMS ON THE BOARD (DEER, SQUASH, CHICKEN, FISH, CRAB, SHRIMP), AND THREE DICE ARE ROLLED. EACH DIE HAS EQUAL CHANCE OF BEING ONE OF THE SIX ITEMS. YOU PLACE BETS ON WHAT ITEM YOU THINK THE DICE WILL SHOW. THEN YOU ROLL THE DIE. FOR EACH DICE THAT HAS YOUR SELECTED ITEM(S), YOU GET YOUR MONEY BACK PLUS WHATEVER YOU BET. IF THE DICE DON'T INCLUDE YOUR SELECTED ITEM(S), YOU LOSE THE MONEY YOU BET ON THOSE ITEM(S).":
