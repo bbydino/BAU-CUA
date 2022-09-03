@@ -24,12 +24,7 @@ const Board = () => {
   const user = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const [values, setValues] = useState<BoardItemValue[]>(
-    BOARD_ITEM_MAPPING.map((item) => ({
-      item: item,
-      value: 0,
-    }))
-  );
+  const [values, setValues] = useState<BoardItemValue[]>(initValues);
 
   const [dice, setDice] = useState<BoardItemModel[]>([
     BOARD_ITEM_MAPPING[4],
@@ -68,7 +63,7 @@ const Board = () => {
   }, [isDiceRolling]);
 
   useEffect(() => {
-    if (checkDice && user) {
+    if (checkDice) {
       const netMoney = getNetMoney(values, dice);
       dispatch(setMoney(user.money + netMoney));
 
@@ -81,8 +76,11 @@ const Board = () => {
       }
 
       setCheckDice(false);
+    } else {
+      setValues(getZeroValues(values));
     }
-  }, [checkDice, dice, dispatch, user, values]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkDice]);
 
   useEffect(() => {
     setIsBetError(getTotalBet(values) > user.money);
@@ -142,11 +140,7 @@ const Board = () => {
   };
 
   const resetValues = () => {
-    let newValues = values.slice();
-    for (const newValue of newValues) {
-      newValues[newValue.item.idx].value = 0;
-    }
-    setValues(newValues);
+    setValues(getZeroValues(values));
   };
 
   return (
@@ -156,8 +150,8 @@ const Board = () => {
       flexDirection="column"
       justifyContent="space-around"
       rowSpacing={1}
-      xl={8}
-      sm={9}
+      xl={7}
+      sm={8}
       sx={CARD_STYLE}
     >
       <Grid container item flexDirection="row" justifyContent="center">
@@ -239,6 +233,19 @@ const Board = () => {
       </Grid>
     </Grid>
   );
+};
+
+const initValues = BOARD_ITEM_MAPPING.map((item) => ({
+  item: item,
+  value: 0,
+}));
+
+const getZeroValues = (values: BoardItemValue[]) => {
+  let newValues = values.slice();
+  for (const newValue of newValues) {
+    newValues[newValue.item.idx].value = 0;
+  }
+  return newValues;
 };
 
 const getTotalBet = (values: BoardItemValue[]) =>
