@@ -10,7 +10,7 @@ export enum Languages {
 
 export function t(eng: string, lang: Languages) {
   if (lang === Languages.VIETNAMESE) {
-    return toViet(eng);
+    return toViet(eng) || eng;
   }
 
   return eng;
@@ -94,7 +94,11 @@ const LANGUAGE_NAMES_VIET = {
   ENGLISH: String.fromCharCode(84, 73, 8240, 110, 103, 32, 65, 110, 104), // TIẾNG ANH
   VIETNAMESE: String.fromCharCode(84, 73, 8240, 110, 103, 32, 118, 73, 6, 84), // TIẾNG VIỆT
 };
-
+const INSTRUCTIONS_VIET = {
+  "HOW TO PLAY": "",
+  "THERE ARE SIX ITEMS ON THE BOARD (DEER, SQUASH, CHICKEN, FISH, CRAB, SHRIMP), AND THREE DICE ARE ROLLED. EACH DIE HAS EQUAL CHANCE OF BEING ONE OF THE SIX ITEMS. YOU PLACE BETS ON WHAT ITEM YOU THINK THE DICE WILL SHOW. THEN YOU ROLL THE DIE. FOR EACH DICE THAT HAS YOUR SELECTED ITEM(S), YOU GET YOUR MONEY BACK PLUS WHATEVER YOU BET. IF THE DICE DON'T INCLUDE YOUR SELECTED ITEM(S), YOU LOSE THE MONEY YOU BET ON THOSE ITEM(S).":
+    "",
+};
 interface EnglishToVietMap {
   [index: string]: string;
 }
@@ -102,4 +106,5 @@ export const ENGLISH_TO_VIET: EnglishToVietMap = {
   ...BOARD_ITEMS_VIET,
   ...PLAYER_INFO_VIET,
   ...LANGUAGE_NAMES_VIET,
+  ...INSTRUCTIONS_VIET,
 };

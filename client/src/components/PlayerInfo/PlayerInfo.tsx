@@ -1,4 +1,5 @@
 import {
+  Chip,
   Grid,
   MenuItem,
   Select,
@@ -9,7 +10,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
 import { setLang } from "../../store/slices/userSlice";
-import { CARD_STYLE, formatMoney, Languages, t } from "../../util";
+import { CARD_STYLE, Languages, t } from "../../util";
+import HowToPlay from "./HowToPlay";
 
 const PlayerInfo = () => {
   const user = useAppSelector((state) => state.user);
@@ -34,6 +36,9 @@ const PlayerInfo = () => {
       sx={CARD_STYLE}
     >
       <Grid item>
+        <HowToPlay />
+      </Grid>
+      <Grid item>
         <Typography variant="h6" color="primary">
           Player Summary
         </Typography>
@@ -57,16 +62,25 @@ const PlayerInfo = () => {
             color="secondary"
             value={user.lang}
             onChange={changeLang}
+            IconComponent={() => <></>}
           >
+            {/* TODO: CHANGE MENU BG COLOR TO PRIMARY */}
             <MenuItem color="secondary" value={Languages.ENGLISH}>
               <Typography variant="body2" color="secondary">
                 {t("ENGLISH", Languages.ENGLISH)}
               </Typography>
             </MenuItem>
             <MenuItem color="secondary" value={Languages.VIETNAMESE}>
-              <Typography variant="body2" color="secondary">
-                {t("VIETNAMESE", Languages.VIETNAMESE)}
-              </Typography>
+              <Grid container flexDirection="row" columnSpacing={1}>
+                <Grid item>
+                  <Typography variant="body2" color="secondary">
+                    {t("VIETNAMESE", Languages.VIETNAMESE)}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Chip label="BETA" color="info" size="small" />
+                </Grid>
+              </Grid>
             </MenuItem>
           </Select>
         </Grid>
@@ -78,7 +92,7 @@ const PlayerInfo = () => {
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">
-          💸 {t("MONEY", user.lang) + ": $" + formatMoney(user.money)}
+          💸 {t("MONEY", user.lang) + ": $" + user.money}
         </Typography>
       </Grid>
       <Grid item>
