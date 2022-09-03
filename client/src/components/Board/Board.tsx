@@ -17,7 +17,6 @@ import {
   t,
 } from "../../util";
 import BoardItem from "./BoardItem";
-import BoardItemInput from "./BoardItemInput";
 import Dice from "./Dice";
 
 const Board = () => {
@@ -90,17 +89,9 @@ const Board = () => {
     <BoardItem
       key={item.name + "boardItem"}
       item={item}
-      handleItemClick={(name) => handleItemClick(name)}
-    />
-  );
-
-  const renderBoardItemInput = (item: BoardItemModel) => (
-    <BoardItemInput
-      key={item.name + "input"}
-      item={item}
       value={values[item.idx].value}
-      handleInputChange={handleInputChange}
       disabled={isDiceRolling || isBetSaved}
+      handleInputChange={handleInputChange}
     />
   );
 
@@ -122,10 +113,6 @@ const Board = () => {
       newValues[item.idx].value = value;
     }
     setValues(newValues);
-  };
-
-  const handleItemClick = (name: string) => {
-    console.log("CLICK:", name);
   };
 
   const getRandomDiceIdx = () =>
@@ -170,19 +157,11 @@ const Board = () => {
           </b>
         </Typography>
       </Grid>
-      <Grid
-        container
-        item
-        flexDirection="row"
-        justifyContent="space-evenly"
-        wrap="wrap"
-      >
+      <Grid item container flexDirection="row" justifyContent="space-evenly">
         {BOARD_ITEM_MAPPING.slice(0, 3).map(renderBoardItem)}
-        {BOARD_ITEM_MAPPING.slice(0, 3).map(renderBoardItemInput)}
       </Grid>
-      <Grid container item flexDirection="row" justifyContent="space-evenly">
+      <Grid item container flexDirection="row" justifyContent="space-evenly">
         {BOARD_ITEM_MAPPING.slice(3, 6).map(renderBoardItem)}
-        {BOARD_ITEM_MAPPING.slice(3, 6).map(renderBoardItemInput)}
       </Grid>
       <Grid item container flexDirection="row">
         <Grid item xs={6}>

@@ -1,14 +1,29 @@
-import { Avatar, Grid, Tooltip, Typography } from "@mui/material";
-import React from "react";
+import { Avatar, Grid, TextField, Tooltip, Typography } from "@mui/material";
+import React, { useRef } from "react";
 import { useAppSelector } from "../../store/hooks";
 import { BoardItem as BoardItemModel, t } from "../../util";
 
 interface BoardItemProps {
   item: BoardItemModel;
-  handleItemClick: (item: string) => void;
+  value: number;
+  disabled: boolean;
+  handleInputChange: (
+    item: BoardItemModel,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
-const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
+const BoardItem: React.FC<BoardItemProps> = ({
+  item,
+  value,
+  disabled,
+  handleInputChange,
+}) => {
   const user = useAppSelector((state) => state.user);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleItemClick = () => {
+    inputRef.current?.focus();
+  };
 
   return (
     <Grid
@@ -44,9 +59,27 @@ const BoardItem: React.FC<BoardItemProps> = ({ item, handleItemClick }) => {
               maxWidth: "169px",
               border: "6.9px solid " + item.color,
             }}
-            onClick={() => handleItemClick(item.name)}
+            onClick={handleItemClick}
           />
         </Tooltip>
+      </Grid>
+      <Grid item>
+        <TextField
+          fullWidth
+          inputRef={inputRef}
+          type="number"
+          variant="outlined"
+          value={value.toString()}
+          size="small"
+          onChange={(event) => handleInputChange(item, event)}
+          disabled={disabled}
+          inputProps={{
+            style: {
+              textAlign: "center",
+              backgroundColor: item.color,
+            },
+          }}
+        />
       </Grid>
     </Grid>
   );
