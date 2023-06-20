@@ -4,6 +4,7 @@ import type { RootState } from "../store";
 
 // Define a type for the slice state
 export interface UserState {
+  userId: string;
   name: string;
   lang: Languages;
   money: number;
@@ -16,6 +17,7 @@ export interface UserState {
 
 // Define the initial state using that type
 const initialState: UserState = {
+  userId: "guest",
   name: "guest",
   lang: Languages.ENGLISH,
   money: 1000,

@@ -5,6 +5,10 @@ import fishImg from "../img/fish.gif";
 import shrimpImg from "../img/shrimp.gif";
 import squashImg from "../img/squash.gif";
 
+export const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+export const SERVER_PORT = process.env.REACT_APP_SERVER_PORT;
+export const API_ENDPOINT = `${SERVER_URL}:${SERVER_PORT}`;
+
 export const BOARD_ITEM_NAMES = {
   SHRIMP: "shrimp",
   CRAB: "crab",
