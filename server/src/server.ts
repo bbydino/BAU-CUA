@@ -1,3 +1,5 @@
+import bodyParser from "body-parser";
+import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
 import { getDb } from "./db.js";
@@ -12,60 +14,79 @@ const DB_USER_COLLECTION = process.env.DB_USER_COLLECTION || "";
 /* get DB connection */
 const db = await getDb(CONN_STR, DB_STR);
 
-/* set up express */
+/* set up express with CORS */
 const app = express();
+app.use(cors());
 
 app.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
   console.log(`GET user (userId: ${userId})`);
 
-  let collection = await db.collection(DB_USER_COLLECTION);
-  let result = await collection.findOne({ userId: userId });
-  if (!result) {
-    res.json({ status: 404, error: "ERROR" }).status(404);
-    console.error("GET error");
-  } else {
-    res.json(result).status(200);
+  try {
+    let collection = await db.collection(DB_USER_COLLECTION);
+    let result = await collection.findOne({ userId: userId });
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      throw new Error("GET error");
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(404).json({ status: 404, error: "ERROR" });
   }
 });
 
-app.post("/user", async (req, res) => {
+app.post("/user", bodyParser.json(), async (req, res) => {
   const { userId, name, lang, money, winStreak, losingStreak } = req.body;
-  console.log(`POST user (userId: ${userId})`);
+  console.log(`POST user`, req.body);
 
-  let collection = await db.collection(DB_USER_COLLECTION);
-  let result = await collection.insertOne({
-    userId: userId,
-    name: name,
-    lang: lang,
-    money: money,
-    winStreak: winStreak,
-    losingStreak: losingStreak,
-  });
-  if (!result) {
-    res.json({ status: 500, error: "ERROR" }).status(500);
-    console.error("POST error");
-  } else {
-    res.json(result).status(201);
+  try {
+    let collection = await db.collection(DB_USER_COLLECTION);
+    let result = await collection.insertOne({
+      userId: userId,
+      name: name,
+      lang: lang,
+      money: money,
+      winStreak: winStreak,
+      losingStreak: losingStreak,
+    });
+    if (result) {
+      res.status(201).json(result);
+    } else {
+      throw new Error("POST error");
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ status: 500, error: "ERROR" });
   }
 });
 
-app.put("/user/:userId", async (req, res) => {
+app.put("/user/:userId", bodyParser.json(), async (req, res) => {
   const { userId } = req.params;
   const { name, lang, money, winStreak, losingStreak } = req.body;
-  console.log(`PUT user (userId: ${userId})`);
+  console.log(`PUT user (userId: ${userId})`, req.body);
 
-  const updates = {
-    $push: { name, lang, money, winStreak, losingStreak },
-  };
+  try {
+    const updates = {
+      $set: {
+        name: name,
+        lang: lang,
+        money: money,
+        winStreak: winStreak,
+        losingStreak: losingStreak,
+      },
+    };
 
-  let collection = await db.collection(DB_USER_COLLECTION);
-  let result = await collection.updateOne({ userId: userId }, updates);
-  if (!result) {
-    res.json({ status: 500, error: "ERROR" }).status(500);
-    console.error("PUT error");
-  } else {
-    res.json(result).status(200);
+    let collection = await db.collection(DB_USER_COLLECTION);
+    let result = await collection.updateOne({ userId: userId }, updates);
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      throw new Error("PUT error");
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ status: 500, error: "ERROR" });
   }
 });
 
@@ -73,13 +94,17 @@ app.delete("/user/:userId", async (req, res) => {
   const { userId } = req.params;
   console.log(`DELETE user (userId: ${userId})`);
 
-  const collection = db.collection(DB_USER_COLLECTION);
-  let result = await collection.deleteOne({ userId: userId });
-  if (!result) {
-    res.json({ status: 500, error: "ERROR" }).status(500);
-    console.error("DELETE error");
-  } else {
-    res.json(result).status(200);
+  try {
+    const collection = db.collection(DB_USER_COLLECTION);
+    let result = await collection.deleteOne({ userId: userId });
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      throw new Error("DELETE error");
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ status: 500, error: "ERROR" });
   }
 });
 
