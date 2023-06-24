@@ -1,38 +1,19 @@
 import { ThemeProvider } from "@emotion/react";
 import { Grid, Typography } from "@mui/material";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import Board from "./components/Board";
 import PlayerInfo from "./components/PlayerInfo";
-import { UserState } from "./store/slices/userSlice";
+import LoginModal from "./components/PlayerInfo/LoginModal";
 import store from "./store/store";
-import { BG_KIRYU_STYLE, Languages, THEME } from "./util";
+import { BG_KIRYU_STYLE, THEME } from "./util";
 
 const App = () => {
   let theme = createTheme(THEME);
   theme = responsiveFontSizes(theme);
 
-  useEffect(() => {
-    const user: UserState = {
-      userId: "test2",
-      name: "test2",
-      lang: Languages.ENGLISH,
-      money: 1000,
-      winStreak: 0,
-      losingStreak: 0,
-      mostChosen: undefined,
-      mostWon: undefined,
-      mostLost: undefined,
-    };
-
-    // TODO: allow user to input their username to get their data
-    // TODO: once they get their data, then allow play
-    // getUserById("test1").then((data) => console.log(data));
-    // deleteUserById(user.userId).then((data) => console.log(data));
-    // createUser(user).then((data) => console.log(data));
-    // updateUserById(user.userId, { ...user, money: 2000 }).then((data) => console.log(data))
-  }, []);
+  const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
 
   return (
     <Provider store={store}>
@@ -56,6 +37,10 @@ const App = () => {
               </Typography>
             </Grid>
             <Grid container item justifyContent="center" alignItems="stretch">
+              <LoginModal
+                isOpen={!loginSuccess}
+                handleLoginSuccess={() => setLoginSuccess(true)}
+              />
               <Board />
               <PlayerInfo />
             </Grid>

@@ -3,21 +3,11 @@ import { UserState } from "../store/slices/userSlice";
 import { API_ENDPOINT } from "../util";
 
 function getUserById(userId: string) {
-  return axios
-    .get(`${API_ENDPOINT}/user/${userId}`)
-    .then((res) => res.data)
-    .catch((err) => {
-      console.error(err);
-    });
+  return axios.get(`${API_ENDPOINT}/user/${userId}`);
 }
 
 function createUser(user: UserState) {
-  return axios
-    .post(`${API_ENDPOINT}/user`, user)
-    .then((res) => res.data)
-    .catch((err) => {
-      console.error(err);
-    });
+  return axios.post(`${API_ENDPOINT}/user`, user);
 }
 
 function updateUserById(userId: string, updatedUser: UserState) {

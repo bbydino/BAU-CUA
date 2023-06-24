@@ -32,6 +32,17 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setUser: (state, action: PayloadAction<UserState>) => {
+      state.userId = action.payload.userId;
+      state.name = action.payload.name;
+      state.lang = action.payload.lang;
+      state.money = action.payload.money;
+      state.winStreak = action.payload.winStreak;
+      state.losingStreak = action.payload.losingStreak;
+      state.mostChosen = action.payload.mostChosen;
+      state.mostWon = action.payload.mostWon;
+      state.mostLost = action.payload.mostLost;
+    },
     setLang: (state, action: PayloadAction<Languages>) => {
       state.lang = action.payload;
     },
@@ -47,7 +58,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setLang, setMoney, setWinStreak, setLosingStreak } =
+export const { setLang, setMoney, setWinStreak, setLosingStreak, setUser } =
   userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

@@ -66,6 +66,29 @@ const PLAYER_INFO_VIET = {
   LANGUAGE: String.fromCharCode(110, 103, 212, 110, 32, 110, 103, 29), // NGÔN NGỮ
   NAME: String.fromCharCode(84, 234, 78), // tên
   MONEY: String.fromCharCode(84, 73, 352, 78), // tiền
+  USERNAME: String.fromCharCode(84, 234, 78, 32, 67, 72, 214, 73), // tên chơi
+  PASSWORD: String.fromCharCode(77, 198, 84, 32, 75, 72, 196, 85), // mật khẩu
+  "CONFIRM PASSWORD":
+    String.fromCharCode(88, 193, 67, 32, 78, 72, 198, 78, 32) +
+    String.fromCharCode(77, 198, 84, 32, 75, 72, 196, 85), // xác nhận mật khẩu
+  LOGIN: String.fromCharCode(78, 72, 198, 80), // nhập
+  PLAY: String.fromCharCode(67, 72, 214, 73), // chơi
+  "NEW PLAYER": String.fromCharCode(78, 71, 208, 158, 73, 32, 77, 167, 73), // người mới
+  "RETURNING PLAYER": String.fromCharCode(
+    78,
+    71,
+    208,
+    158,
+    73,
+    32,
+    84,
+    82,
+    170,
+    32,
+    76,
+    2,
+    73
+  ), //người trở lại
   "WIN STREAK": "",
   "LOSING STREAK": "",
   "MOST CHOSEN": "",

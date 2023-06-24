@@ -18,6 +18,8 @@ const db = await getDb(CONN_STR, DB_STR);
 const app = express();
 app.use(cors());
 
+// TODO: ADD HASHED PASSWORD TO BACKEND
+
 app.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
   console.log(`GET user (userId: ${userId})`);
@@ -57,7 +59,7 @@ app.post("/user", bodyParser.json(), async (req, res) => {
     }
   } catch (e) {
     console.error(e);
-    res.status(500).json({ status: 500, error: "ERROR" });
+    res.status(409).json({ status: 409, error: "ERROR" });
   }
 });
 
