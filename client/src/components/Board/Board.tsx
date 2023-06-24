@@ -1,6 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { updateUserById } from "../../api";
 import { useAppSelector } from "../../store/hooks";
 import {
   setLosingStreak,
@@ -8,12 +9,12 @@ import {
   setWinStreak,
 } from "../../store/slices/userSlice";
 import {
+  BOARD_ITEM_MAPPING,
   BoardItem as BoardItemModel,
   BoardItemValue,
-  BOARD_ITEM_MAPPING,
   CARD_STYLE,
-  formatMoney,
   MIN_BET_AMOUNT,
+  formatMoney,
   t,
 } from "../../util";
 import BoardItem from "./BoardItem";
@@ -63,16 +64,32 @@ const Board = () => {
 
   useEffect(() => {
     if (checkDice) {
+      let newMoney = user.money;
+      let newWinStreak = user.winStreak;
+      let newLosingStreak = user.losingStreak;
+
       const netMoney = getNetMoney(values, dice);
-      dispatch(setMoney(user.money + netMoney));
+      newMoney += netMoney;
+      dispatch(setMoney(newMoney));
 
       if (netMoney > 0) {
-        dispatch(setWinStreak(user.winStreak + 1));
-        dispatch(setLosingStreak(0));
+        newWinStreak++;
+        newLosingStreak = 0;
+        dispatch(setWinStreak(newWinStreak));
+        dispatch(setLosingStreak(newLosingStreak));
       } else if (netMoney < 0) {
-        dispatch(setLosingStreak(user.losingStreak + 1));
-        dispatch(setWinStreak(0));
+        newLosingStreak++;
+        newWinStreak = 0;
+        dispatch(setLosingStreak(newLosingStreak));
+        dispatch(setWinStreak(newWinStreak));
       }
+
+      updateUserById(user.userId, {
+        ...user,
+        money: newMoney,
+        winStreak: newWinStreak,
+        losingStreak: newLosingStreak,
+      });
 
       setCheckDice(false);
     } else {
