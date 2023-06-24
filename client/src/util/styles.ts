@@ -11,11 +11,15 @@ export const BG_KIRYU_STYLE: React.CSSProperties = {
   overflow: "auto",
 };
 
-export const BG_STYLE: React.CSSProperties = {
+export const BG: React.CSSProperties = {
   background: `url(${bg})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   overflow: "auto",
+};
+
+export const BG_STYLE: React.CSSProperties = {
+  ...BG,
   border: "6.9px solid #AF9C1B",
   borderRadius: "6.9px",
   width: "90%",

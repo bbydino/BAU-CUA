@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { updateUserById } from "../../api";
 import { useAppSelector } from "../../store/hooks";
 import { setLang } from "../../store/slices/userSlice";
-import { Languages, t } from "../../util";
+import { BG, Languages, t } from "../../util";
 
 const LangSelect = () => {
   const user = useAppSelector((state) => state.user);
@@ -33,8 +33,16 @@ const LangSelect = () => {
       value={user.lang}
       onChange={changeLang}
       IconComponent={() => <></>}
+      inputProps={{
+        MenuProps: {
+          MenuListProps: {
+            sx: {
+              ...BG,
+            },
+          },
+        },
+      }}
     >
-      {/* TODO: CHANGE MENU BG COLOR TO PRIMARY */}
       <MenuItem color="secondary" value={Languages.ENGLISH}>
         <Typography variant="body2" color="secondary">
           {t("ENGLISH", Languages.ENGLISH)}
@@ -45,10 +53,8 @@ const LangSelect = () => {
           <Grid item>
             <Typography variant="body2" color="secondary">
               {t("VIETNAMESE", Languages.VIETNAMESE)}
+              <Chip label="BETA" color="info" size="small" />
             </Typography>
-          </Grid>
-          <Grid item>
-            <Chip label="BETA" color="info" size="small" />
           </Grid>
         </Grid>
       </MenuItem>
