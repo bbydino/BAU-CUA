@@ -65,4 +65,6 @@ export const { setLang, setMoney, setWinStreak, setLosingStreak, setUser } =
 export const selectName = (state: RootState) => state.user.name;
 export const selectMoney = (state: RootState) => state.user.money;
 
+export const isGuestUserId = (userId: string) => userId === initialState.userId;
+
 export default userSlice.reducer;

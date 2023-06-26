@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { updateUserById } from "../../api";
 import { useAppSelector } from "../../store/hooks";
 import {
+  isGuestUserId,
   setLosingStreak,
   setMoney,
   setWinStreak,
@@ -84,12 +85,14 @@ const Board = () => {
         dispatch(setWinStreak(newWinStreak));
       }
 
-      updateUserById(user.userId, {
-        ...user,
-        money: newMoney,
-        winStreak: newWinStreak,
-        losingStreak: newLosingStreak,
-      });
+      if (!isGuestUserId(user.userId)) {
+        updateUserById(user.userId, {
+          ...user,
+          money: newMoney,
+          winStreak: newWinStreak,
+          losingStreak: newLosingStreak,
+        });
+      }
 
       setCheckDice(false);
     } else {

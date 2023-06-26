@@ -10,7 +10,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { updateUserById } from "../../api";
 import { useAppSelector } from "../../store/hooks";
-import { setLang } from "../../store/slices/userSlice";
+import { isGuestUserId, setLang } from "../../store/slices/userSlice";
 import { BG, Languages, t } from "../../util";
 
 const LangSelect = () => {
@@ -21,7 +21,9 @@ const LangSelect = () => {
     const newLang = event.target.value as Languages;
     if (Object.values(Languages).includes(newLang)) {
       dispatch(setLang(newLang));
-      updateUserById(user.userId, { ...user, lang: newLang });
+      if (!isGuestUserId(user.userId)) {
+        updateUserById(user.userId, { ...user, lang: newLang });
+      }
     }
   };
 

@@ -14,7 +14,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser, getUserById } from "../../api";
 import { useAppSelector } from "../../store/hooks";
-import { UserState, setUser } from "../../store/slices/userSlice";
+import {
+  UserState,
+  isGuestUserId,
+  setUser,
+} from "../../store/slices/userSlice";
 import { BG_STYLE, THEME, t } from "../../util";
 import HowToPlay from "./HowToPlay";
 import LangSelect from "./LangSelect";
@@ -71,8 +75,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
   };
 
   const handleLoginSubmit = async () => {
-    if (username === "" || password === "") {
-      setError("CANNOT HAVE EMPTY USERNAME OR PASSWORD");
+    if (username === "" || password === "" || isGuestUserId(username)) {
+      setError("INVALID USERNAME OR PASSWORD");
       return;
     }
     if (accountType === AccountTypes.NEW && password !== passwordConfirm) {
