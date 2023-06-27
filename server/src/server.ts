@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { config } from "dotenv";
@@ -10,6 +11,7 @@ const PORT = process.env.PORT;
 const CONN_STR = process.env.DB_URI || "";
 const DB_STR = process.env.DB_NAME || "";
 const DB_USER_COLLECTION = process.env.DB_USER_COLLECTION || "";
+const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
 
 /* get DB connection */
 const db = await getDb(CONN_STR, DB_STR);
@@ -17,8 +19,6 @@ const db = await getDb(CONN_STR, DB_STR);
 /* set up express with CORS */
 const app = express();
 app.use(cors());
-
-// TODO: ADD HASHED PASSWORD TO BACKEND
 
 app.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
@@ -38,15 +38,38 @@ app.get("/user/:userId", async (req, res) => {
   }
 });
 
+app.post("/user/:userId/login", bodyParser.json(), async (req, res) => {
+  const { userId, password } = req.body;
+  console.log(`GET user (userId: ${userId}, password: ${password})`);
+
+  try {
+    let collection = await db.collection(DB_USER_COLLECTION);
+    let result = await collection.findOne({ userId: userId });
+
+    // check that account hash matches input password hash
+    if (result && (await bcrypt.compare(password, result.hash))) {
+      res.status(200).json(result);
+    } else {
+      throw new Error("GET error");
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(404).json({ status: 404, error: "ERROR" });
+  }
+});
+
 app.post("/user", bodyParser.json(), async (req, res) => {
-  const { userId, name, lang, money, winStreak, losingStreak } = req.body;
+  const { userId, name, password, lang, money, winStreak, losingStreak } =
+    req.body;
   console.log(`POST user`, req.body);
 
   try {
+    const hash = await bcrypt.hash(password, SALT_ROUNDS);
     let collection = await db.collection(DB_USER_COLLECTION);
     let result = await collection.insertOne({
       userId: userId,
       name: name,
+      hash: hash,
       lang: lang,
       money: money,
       winStreak: winStreak,

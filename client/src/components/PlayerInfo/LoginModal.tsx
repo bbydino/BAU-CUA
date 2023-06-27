@@ -12,7 +12,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createUser, getUserById } from "../../api";
+import { createUser, getUserByIdAndPassword } from "../../api";
 import { useAppSelector } from "../../store/hooks";
 import {
   UserState,
@@ -86,6 +86,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
     try {
       if (accountType === AccountTypes.NEW) {
+        // create new user
         const newUser: UserState = {
           userId: username,
           name: username,
@@ -97,14 +98,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
           mostWon: undefined,
           mostLost: undefined,
         };
-        // TODO: ADD HASHED PASSWORD TO API CALL
-        await createUser(newUser);
+        await createUser(newUser, password);
+
+        // update redux data
         dispatch(setUser(newUser));
         setError("");
         handleLoginSuccess();
       } else if (accountType === AccountTypes.EXISTING) {
-        // TODO: ADD HASHED PASSWORD TO API CALL
-        const res = await getUserById(username);
+        // fetch existing user
+        const res = await getUserByIdAndPassword(username, password);
+
+        // update redux data
         const user: UserState = {
           userId: res.data.userId,
           name: res.data.name,

@@ -6,8 +6,15 @@ function getUserById(userId: string) {
   return axios.get(`${API_ENDPOINT}/user/${userId}`);
 }
 
-function createUser(user: UserState) {
-  return axios.post(`${API_ENDPOINT}/user`, user);
+function getUserByIdAndPassword(userId: string, password: string) {
+  return axios.post(`${API_ENDPOINT}/user/${userId}/login`, {
+    userId: userId,
+    password: password,
+  });
+}
+
+function createUser(user: UserState, password: string) {
+  return axios.post(`${API_ENDPOINT}/user`, { ...user, password: password });
 }
 
 function updateUserById(userId: string, updatedUser: UserState) {
@@ -28,4 +35,10 @@ function deleteUserById(userId: string) {
     });
 }
 
-export { createUser, deleteUserById, getUserById, updateUserById };
+export {
+  createUser,
+  deleteUserById,
+  getUserById,
+  getUserByIdAndPassword,
+  updateUserById,
+};
