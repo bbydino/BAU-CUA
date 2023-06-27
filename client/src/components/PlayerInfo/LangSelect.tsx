@@ -46,14 +46,14 @@ const LangSelect = () => {
       }}
     >
       <MenuItem color="secondary" value={Languages.ENGLISH}>
-        <Typography variant="body2" color="secondary">
+        <Typography component="span" variant="body2" color="secondary">
           {t("ENGLISH", Languages.ENGLISH)}
         </Typography>
       </MenuItem>
       <MenuItem color="secondary" value={Languages.VIETNAMESE}>
         <Grid container flexDirection="row" columnSpacing={1}>
           <Grid item>
-            <Typography variant="body2" color="secondary">
+            <Typography component="span" variant="body2" color="secondary">
               {t("VIETNAMESE", Languages.VIETNAMESE)}
               <Chip label="BETA" color="info" size="small" />
             </Typography>
