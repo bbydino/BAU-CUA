@@ -194,7 +194,7 @@ const Board = () => {
             disabled={isBetError || isDiceRolling}
             sx={{ height: "100%" }}
           >
-            <Typography align="center" variant="h6" color="secondary">
+            <Typography align="center" variant="body2" color="secondary">
               <b>{t("SAVE BET", user.lang)}</b>
             </Typography>
           </Button>
@@ -209,7 +209,7 @@ const Board = () => {
             disabled={isBetSaved || isDiceRolling}
             sx={{ height: "100%" }}
           >
-            <Typography align="center" variant="h6" color="secondary">
+            <Typography align="center" variant="body2" color="secondary">
               <b>{t("CLEAR BET", user.lang)}</b>
             </Typography>
           </Button>
@@ -225,7 +225,7 @@ const Board = () => {
           disabled={!isBetSaved}
           sx={{ height: "100%" }}
         >
-          <Typography align="center" variant="h6" color="primary">
+          <Typography align="center" variant="body2" color="primary">
             <b>{t("ROLL DICE", user.lang)}</b>
           </Typography>
         </Button>
