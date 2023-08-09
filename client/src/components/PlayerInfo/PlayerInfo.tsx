@@ -50,22 +50,6 @@ const PlayerInfo = () => {
           😔 {t("LOSING STREAK", user.lang) + ": " + user.losingStreak}
         </Typography>
       </Grid>
-      <Grid item>
-        <Typography variant="body2" color="secondary">
-          MOST CHOSEN: {user.mostChosen}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Typography variant="body2" color="secondary">
-          LUCKY ANIMAL: {user.mostWon}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Typography variant="body2" color="secondary">
-          UNLUCKY ANIMAL: {user.mostLost}
-        </Typography>
-      </Grid>
-      <Grid item></Grid>
     </Grid>
   );
 };
