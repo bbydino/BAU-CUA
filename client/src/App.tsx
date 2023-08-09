@@ -1,18 +1,51 @@
 import { ThemeProvider } from "@emotion/react";
 import { Grid, Typography } from "@mui/material";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Board } from "./components/Board";
-import { LoginModal, PlayerInfo } from "./components/PlayerInfo";
+import { JoinModal, LoginModal, PlayerInfo } from "./components/PlayerInfo";
 import store from "./store/store";
-import { BG_KIRYU_STYLE, THEME } from "./util";
+import { BG_KIRYU_STYLE, THEME, socket } from "./util";
 
 const App = () => {
   let theme = createTheme(THEME);
   theme = responsiveFontSizes(theme);
 
   const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
+  const [joinSuccess, setJoinSuccess] = useState<boolean>(false);
+  const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
+
+  useEffect(() => {
+    function onConnect() {
+      setIsConnected(true);
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+    }
+
+    function onJoin() {
+      setJoinSuccess(true);
+    }
+
+    socket.connect();
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
+    // TODO: list active players in room (create new component in playerInfo)
+    socket.on("join", onJoin);
+
+    // TODO: display active status
+    console.log(isConnected);
+
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+      socket.off("join", onJoin);
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <Provider store={store}>
@@ -39,6 +72,10 @@ const App = () => {
               <LoginModal
                 isOpen={!loginSuccess}
                 handleLoginSuccess={() => setLoginSuccess(true)}
+              />
+              <JoinModal
+                isOpen={loginSuccess && !joinSuccess}
+                handleJoinSuccess={() => setJoinSuccess(true)}
               />
               <Board />
               <PlayerInfo />

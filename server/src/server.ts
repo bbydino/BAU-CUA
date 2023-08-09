@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import { getDb } from "./db.js";
 
 /* load environment variables */
@@ -19,6 +21,24 @@ const db = await getDb(CONN_STR, DB_STR);
 /* set up express with CORS */
 const app = express();
 app.use(cors());
+
+/* set up socket.io with express and CORS*/
+const server = createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
+
+io.on("connection", (socket) => {
+  console.log(`socket [${socket.id}] connected.`);
+
+  socket.on("join", (room) => {
+    console.log(`join room: ${room}`);
+    socket.join(room);
+    io.to(room).emit("join");
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`socket [${socket.id}] disconnected.`);
+  });
+});
 
 app.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
@@ -134,6 +154,6 @@ app.delete("/user/:userId", async (req, res) => {
 });
 
 // start the Express server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`);
 });
