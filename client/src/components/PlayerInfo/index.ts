@@ -1,4 +1,4 @@
-export * from "./HowToPlay";
-export * from "./LangSelect";
-export * from "./LoginModal";
-export { default } from "./PlayerInfo";
+export { default as HowToPlay } from "./HowToPlay";
+export { default as LangSelect } from "./LangSelect";
+export { default as LoginModal } from "./LoginModal";
+export { default as PlayerInfo } from "./PlayerInfo";

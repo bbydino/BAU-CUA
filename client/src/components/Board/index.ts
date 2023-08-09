@@ -1,3 +1,3 @@
-export { default } from "./Board";
-export * from "./BoardItem";
-export * from "./Dice";
+export { default as Board } from "./Board";
+export { default as BoardItem } from "./BoardItem";
+export { default as Dice } from "./Dice";

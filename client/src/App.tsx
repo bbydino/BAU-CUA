@@ -3,9 +3,8 @@ import { Grid, Typography } from "@mui/material";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
-import Board from "./components/Board";
-import PlayerInfo from "./components/PlayerInfo";
-import LoginModal from "./components/PlayerInfo/LoginModal";
+import { Board } from "./components/Board";
+import { LoginModal, PlayerInfo } from "./components/PlayerInfo";
 import store from "./store/store";
 import { BG_KIRYU_STYLE, THEME } from "./util";
 
