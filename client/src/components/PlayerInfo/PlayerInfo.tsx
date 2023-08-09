@@ -27,21 +27,8 @@ const PlayerInfo = () => {
           Player Summary
         </Typography>
       </Grid>
-      <Grid
-        item
-        container
-        flexDirection="row"
-        alignItems="center"
-        columnSpacing={1}
-      >
-        <Grid item>
-          <Typography variant="body2" color="secondary">
-            🌐 {t("LANGUAGE", user.lang) + ":"}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <LangSelect />
-        </Grid>
+      <Grid item>
+        <LangSelect justifyContent="start" />
       </Grid>
       <Grid item>
         <Typography variant="body2" color="secondary">

@@ -163,22 +163,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <Grid item>
             <HowToPlay />
           </Grid>
-          <Grid
-            item
-            container
-            flexDirection="row"
-            justifyContent="center"
-            alignItems="center"
-            columnSpacing={1}
-          >
-            <Grid item>
-              <Typography variant="body2" color="secondary">
-                🌐 {t("LANGUAGE", user.lang) + ":"}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <LangSelect />
-            </Grid>
+          <Grid item>
+            <LangSelect />
           </Grid>
           <Grid item container flexDirection="row" justifyContent="center">
             <ToggleButtonGroup
