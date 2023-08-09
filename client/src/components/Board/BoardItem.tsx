@@ -53,10 +53,10 @@ const BoardItem: React.FC<BoardItemProps> = ({
             src={item.img}
             alt={item.name}
             sx={{
-              width: "20vw",
-              height: "20vw",
-              maxHeight: "169px",
-              maxWidth: "169px",
+              width: "10vh",
+              height: "10vh",
+              maxHeight: "100px",
+              maxWidth: "100px",
               border: "6.9px solid " + item.color,
             }}
             onClick={handleItemClick}
@@ -65,7 +65,6 @@ const BoardItem: React.FC<BoardItemProps> = ({
       </Grid>
       <Grid item>
         <TextField
-          fullWidth
           inputRef={inputRef}
           type="number"
           variant="outlined"

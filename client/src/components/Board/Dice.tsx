@@ -29,8 +29,8 @@ const Dice: React.FC<DiceProps> = ({ item }) => {
         alt={item.name}
         variant="rounded"
         sx={{
-          width: "13vw",
-          height: "13vw",
+          width: "10vh",
+          height: "10vh",
           maxHeight: "100px",
           maxWidth: "100px",
           border: "5px solid " + item.color,

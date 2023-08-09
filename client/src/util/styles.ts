@@ -15,7 +15,7 @@ export const BG: React.CSSProperties = {
   background: `url(${bg})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
-  overflow: "auto",
+  overflow: "hidden",
 };
 
 export const BG_STYLE: React.CSSProperties = {
