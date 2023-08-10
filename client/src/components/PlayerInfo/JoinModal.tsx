@@ -20,8 +20,15 @@ interface JoinModalProps {
 }
 const JoinModal: React.FC<JoinModalProps> = ({ isOpen, handleJoinSuccess }) => {
   const user = useAppSelector((state) => state.user);
+  const [name, setName] = useState<string>("");
   const [room, setRoom] = useState<string>("");
   const [error, setError] = useState<string>("");
+
+  const handleNameInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setName(event.target.value);
+  };
 
   const handleRoomInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,13 +37,18 @@ const JoinModal: React.FC<JoinModalProps> = ({ isOpen, handleJoinSuccess }) => {
   };
 
   const handleJoinSubmit = () => {
-    if (room === "") {
-      setError("ROOM NAME CANNOT BE EMPTY");
+    if (room === "" || name === "") {
+      setError("NAME AND ROOM CANNOT BE EMPTY");
       return;
     }
 
     setError("");
-    socket.emit("join", room);
+    socket.emit("join", { name: name, room: room }, (err: string) => {
+      if (err) setError(err);
+      else {
+        handleJoinSuccess();
+      }
+    });
   };
 
   return (
@@ -79,8 +91,28 @@ const JoinModal: React.FC<JoinModalProps> = ({ isOpen, handleJoinSuccess }) => {
             <TextField
               focused
               type="text"
+              label={t("NAME", user.lang)}
+              id="name"
+              variant="outlined"
+              value={name}
+              size="small"
+              onChange={(event) => handleNameInputChange(event)}
+              color="secondary"
+              inputProps={{
+                style: {
+                  textAlign: "center",
+                  color: (THEME.palette!.secondary as SimplePaletteColorOptions)
+                    .main,
+                },
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              focused
+              type="text"
               label={t("ROOM NAME", user.lang)}
-              id="username"
+              id="room"
               variant="outlined"
               value={room}
               size="small"

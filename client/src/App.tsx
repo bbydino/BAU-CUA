@@ -4,7 +4,12 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Board } from "./components/Board";
-import { JoinModal, LoginModal, PlayerInfo } from "./components/PlayerInfo";
+import {
+  JoinModal,
+  LoginModal,
+  PlayerInfo,
+  RoomInfo,
+} from "./components/PlayerInfo";
 import store from "./store/store";
 import { BG_KIRYU_STYLE, THEME, socket } from "./util";
 
@@ -14,34 +19,18 @@ const App = () => {
 
   const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
   const [joinSuccess, setJoinSuccess] = useState<boolean>(false);
-  const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 
   useEffect(() => {
-    function onConnect() {
-      setIsConnected(true);
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-    }
-
     function onJoin() {
       setJoinSuccess(true);
     }
 
     socket.connect();
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
 
     // TODO: list active players in room (create new component in playerInfo)
     socket.on("join", onJoin);
 
-    // TODO: display active status
-    console.log(isConnected);
-
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
       socket.off("join", onJoin);
       socket.disconnect();
     };
@@ -85,7 +74,7 @@ const App = () => {
                   <PlayerInfo />
                 </Grid>
                 <Grid item container sx={{ height: "50%" }}>
-                  {/* TODO: ADD ROOM INFO */}
+                  <RoomInfo />
                 </Grid>
               </Grid>
             </Grid>

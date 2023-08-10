@@ -6,6 +6,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { getDb } from "./db.js";
+import { addUser, getUsersInRoom, removeUser } from "./users.js";
 
 /* load environment variables */
 config();
@@ -29,14 +30,45 @@ const io = new Server(server, { cors: { origin: "*" } });
 io.on("connection", (socket) => {
   console.log(`socket [${socket.id}] connected.`);
 
-  socket.on("join", (room) => {
-    console.log(`join room: ${room}`);
-    socket.join(room);
-    io.to(room).emit("join");
+  socket.on("join", ({ name, room }, callback) => {
+    const { err, user } = addUser({ id: socket.id, name: name, room: room });
+
+    if (err) {
+      console.log(`JOIN ROOM ERROR: ${err}.`);
+    }
+
+    if (user) {
+      socket.join(user.room);
+
+      io.to(user.room).emit("message", {
+        user: "BOT",
+        text: `${user.name} has joined.`,
+      });
+
+      io.to(user.room).emit("roomData", {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
+
+      console.log(`"${name}" joined "${room}".`);
+    }
+
+    return callback(err);
   });
 
   socket.on("disconnect", () => {
     console.log(`socket [${socket.id}] disconnected.`);
+    const user = removeUser(socket.id);
+    if (user) {
+      socket.leave(user.room);
+
+      io.to(user.room).emit("roomData", {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
+
+      console.log(`"${user.name}" left "${user.room}".`);
+    }
   });
 });
 
