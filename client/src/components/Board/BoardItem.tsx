@@ -53,8 +53,8 @@ const BoardItem: React.FC<BoardItemProps> = ({
             src={item.img}
             alt={item.name}
             sx={{
-              width: "10vh",
-              height: "10vh",
+              width: "10vw",
+              height: "10vw",
               maxHeight: "100px",
               maxWidth: "100px",
               border: "6.9px solid " + item.color,

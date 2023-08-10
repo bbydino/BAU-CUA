@@ -14,9 +14,7 @@ const PlayerInfo = () => {
       item
       flexDirection="column"
       justifyContent="flex-start"
-      rowSpacing={1}
-      xl={3}
-      sm={3}
+      xs={12}
       sx={CARD_STYLE}
     >
       <Grid item>

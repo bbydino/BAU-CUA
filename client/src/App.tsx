@@ -51,13 +51,21 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <div className="bau-cua" style={BG_KIRYU_STYLE}>
+          <LoginModal
+            isOpen={false}
+            handleLoginSuccess={() => setLoginSuccess(true)}
+          />
+          <JoinModal
+            isOpen={!joinSuccess}
+            handleJoinSuccess={() => setJoinSuccess(true)}
+          />
           <Grid
             container
             flexDirection="row"
             justifyContent="center"
-            rowSpacing={2}
+            sx={{ height: "100%" }}
           >
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{ height: "10%" }}>
               <Typography
                 variant="h3"
                 color="primary"
@@ -68,17 +76,18 @@ const App = () => {
                 <b>BÀU CUA Gà TÔM CÁ NAI</b>
               </Typography>
             </Grid>
-            <Grid container item justifyContent="center" alignItems="stretch">
-              <LoginModal
-                isOpen={!loginSuccess}
-                handleLoginSuccess={() => setLoginSuccess(true)}
-              />
-              <JoinModal
-                isOpen={loginSuccess && !joinSuccess}
-                handleJoinSuccess={() => setJoinSuccess(true)}
-              />
-              <Board />
-              <PlayerInfo />
+            <Grid container item justifyContent="center" sx={{ height: "80%" }}>
+              <Grid item container xs={7} sm={7}>
+                <Board />
+              </Grid>
+              <Grid item container flexDirection="column" xs={5} sm={4}>
+                <Grid item container sx={{ height: "50%" }}>
+                  <PlayerInfo />
+                </Grid>
+                <Grid item container sx={{ height: "50%" }}>
+                  {/* TODO: ADD ROOM INFO */}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </div>

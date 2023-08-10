@@ -22,7 +22,6 @@ export const BG_STYLE: React.CSSProperties = {
   ...BG,
   border: "6.9px solid #AF9C1B",
   borderRadius: "6.9px",
-  width: "90%",
   maxWidth: "600px",
 };
 

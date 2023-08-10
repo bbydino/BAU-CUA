@@ -155,10 +155,8 @@ const Board = () => {
       container
       item
       flexDirection="column"
-      justifyContent="space-around"
-      rowSpacing={1}
-      xl={7}
-      sm={8}
+      justifyContent="flex-start"
+      xs={12}
       sx={CARD_STYLE}
     >
       <Grid container item flexDirection="row" justifyContent="center">
