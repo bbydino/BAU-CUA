@@ -41,11 +41,11 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <div className="bau-cua" style={BG_KIRYU_STYLE}>
           <LoginModal
-            isOpen={false}
+            isOpen={!loginSuccess}
             handleLoginSuccess={() => setLoginSuccess(true)}
           />
           <JoinModal
-            isOpen={!joinSuccess}
+            isOpen={loginSuccess && !joinSuccess}
             handleJoinSuccess={() => setJoinSuccess(true)}
           />
           <Grid
