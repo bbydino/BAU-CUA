@@ -12,6 +12,9 @@ const RoomInfo = () => {
   const [users, setUsers] = useState<RoomUser[]>([]);
   const [room, setRoom] = useState<string>("");
 
+  /* TODO: chat messaging */
+  /* TODO: view others' stats */
+
   useEffect(() => {
     socket.on(
       "roomData",

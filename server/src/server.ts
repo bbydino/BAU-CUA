@@ -33,6 +33,11 @@ io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const { err, user } = addUser({ id: socket.id, name: name, room: room });
 
+    /* TODO: add user data to roomData */
+    /* TODO: synced board */
+    /* TODO: first user in room controls the board */
+    /* TODO: add user bets to room data */
+
     if (err) {
       console.log(`JOIN ROOM ERROR: ${err}.`);
     }
